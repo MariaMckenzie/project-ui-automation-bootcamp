@@ -6,7 +6,7 @@ module.exports = defineConfig({
         setupNodeEvents(on, config) {
         // implement node event listeners here
         },
-        baseUrl: "https://www.saucedemo.com",
+        baseUrl: "https://ui-automation-camp.vercel.app",
         specPattern: 'cypress/e2e/tests/**/*.cy.{js,jsx,ts,tsx}',
         experimentalSessionAndOrigin: true,
         chromeWebSecurity: false,
