@@ -8,12 +8,10 @@
     "cypress:headed": "npx cypress run --headed",
     "cypress:headless": "npx cypress run --headless",
     "cypress:run": "npx cypress run",
-
     "clean": "del -R -f cypress/reports; mkdir cypress/reports; del -f mochawesome.json",
     "test": "npm-run-all clean cypress:run report -c",
     "test:spec": "npm-run-all clean \"cypress:run -- --spec {1}\" report -c --",
     "report": "npx mochawesome-merge cypress/reports/*.json > mochawesome.json && npx marge mochawesome.json && open mochawesome-report/mochawesome.html && del -f mochawesome.json"
- 
   },
   "repository": {
     "type": "git",
@@ -32,5 +30,8 @@
     "mochawesome-merge": "^4.2.1",
     "mochawesome-report-generator": "^6.2.0",
     "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "project-ui-automation-bootcamp": "file:"
   }
 }
