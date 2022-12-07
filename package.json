@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/MariaMckenzie/project-ui-automation-bootcamp/issues"
   },
-  "homepage": "https://github.com/MariaMckenzie/project-ui-automation-bootcamp#readme"
+  "homepage": "https://github.com/MariaMckenzie/project-ui-automation-bootcamp#readme",
+  "devDependencies": {
+    "cypress": "^12.0.1"
+  }
 }
