@@ -1,4 +1,4 @@
-import { existingUser, invalidData, missingData, missingEmail, missingPassword, newUser, nonexistingUser, validUser } from "../../data/user.data"
+import { existingUser, invalidData, missingData, missingEmail, missingPassword, newUser, nonexistingUser } from "../../data/user.data"
 import authenticationPage from "../../pages/authentication.page"
 import homePage from "../../pages/home.page"
 
