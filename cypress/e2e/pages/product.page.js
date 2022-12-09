@@ -1,26 +1,26 @@
 
 /**
-* Contains the locators and selectors found on the login page. 
+* Contains the locators and selectors found on the product page. 
 */
 
 class Product {
 
     /**
-     * @returns the link to go to login section
+     * @returns the title of the product section of the page
      */
-    get loginSection () { return ("div.auth0-lock-tabs-container > ul > li:nth-child(1) > a") }
+    get title () { return (".css-16xlhis > :nth-child(2) > .chakra-heading") }
 
 
     /**
-     * @returns the link to go to signup section
+     * @returns the products section of the page
      */
-    get signupSection () { return ("div.auth0-lock-tabs-container > ul > li:nth-child(2) > a") }
+    get signupSection () { return (".css-16xlhis > :nth-child(2)") }
 
 
     /**
      * @returns the button to signup or register
      */
-    get signInOrRegisterButton () { return ("#signInOrRegister") }
+    get signInOrRegisterButton () { return (".css-12qzrsi > :nth-child(1)") }
     
 
     /**
@@ -68,24 +68,20 @@ class Product {
     // METHODS
 
     /**
-     * Logs in or signs up the user
-     * @param {String} username
-     * @param {String} password
+     * Adds an item to cart
+     * @param {Number} itemNo nth item in the list
      */
-    loginOrSignup (username, password) { 
-        if (username === '' & password === '') {
-            cy.get(this.submitButton).click()
-        } else if (password === '') {
-            cy.get(this.emailInput).type(username)
-            cy.get(this.submitButton).click()
-        } else if (username === '') {
-            cy.get(this.passwordInput).type(password)
-            cy.get(this.submitButton).click()
-        } else {
-            cy.get(this.emailInput).type(username)
-            cy.get(this.passwordInput).type(password)
-            cy.get(this.submitButton).click()
-        }
+     addToCart (itemNo) {
+        cy.get(`css-12qzrsi > : nth-child(${itemNo}) button`).click()
     }
+
+    /**
+     * Adds an item to cart
+     * @param {Number} itemNo nth item in the list
+     */
+    getProductName (itemNo) {
+        cy.get(`css-12qzrsi > : nth-child(${itemNo}) button`).click()
+    }
+
 }
 export default new Product()
