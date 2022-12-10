@@ -53,6 +53,18 @@ class Cart {
     get cartTotal () { return (".snipcart-summary-fees__amount") }
 
 
+    /**
+     * @returns the button to remove a product
+     */
+    get removeButton () { return ("button[title='Remove item']") }
+
+
+    /**
+     * @returns the number of products in the cart
+     */
+    get totalProducts () { return (".snipcart-cart-header__option.snipcart-cart-header__count.snipcart__font--secondary.snipcart__font--bold") }
+
+
 
     // METHODS
 
@@ -66,12 +78,21 @@ class Cart {
     
     /**
      * Retruns the nth product card 
-     * **(Note: The maximum number of products is 22)**
      * @param {Number} itemNo nth item in the list
      * @returns the nth product card
      */
     getProductCard (itemNo) {
-        return (`${itemNo}`)
+        return (`.snipcart-item-list.snipcart-scrollbar.snipcart-item-list--no-shadow > li:nth-child(${itemNo}) > div > div`)
+    }
+
+    
+    /**
+     * Removes  the nth product card 
+     * @param {Number} itemNo nth item in the list
+     * @returns the nth product card
+     */
+    removeProductFromCart (itemNo) {
+        cy.get(`.snipcart-item-list.snipcart-scrollbar.snipcart-item-list--no-shadow > li:nth-child(${itemNo}) > div > div ${this.removeButton}`).click()
     }
 
 
