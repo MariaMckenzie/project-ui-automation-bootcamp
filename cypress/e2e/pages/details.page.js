@@ -3,85 +3,69 @@
 * Contains the locators and selectors found on the product page. 
 */
 
-class Product {
+class Details {
 
     /**
-     * @returns the title of the product section of the page
+     * @returns the input field for the product quantity
      */
-    get title () { return (".css-16xlhis > :nth-child(2) > .chakra-heading") }
-
-
-    /**
-     * @returns the products section of the page
-     */
-    get signupSection () { return (".css-16xlhis > :nth-child(2)") }
+    get productQuantity () { return (".chakra-numberinput__field .css-a8qclj") }
 
 
     /**
-     * @returns the button to signup or register
+     * @returns the product name
      */
-    get signInOrRegisterButton () { return (".css-12qzrsi > :nth-child(1)") }
+    get productName () { return (".css-84zodg .css-1dklj6k") }
+
+
+    /**
+     * @returns the product price
+     */
+    get productPrice () { return (".css-84zodg > p:nth-child(2)") }
+
+
+    /**
+     * @returns the product description
+     */
+    get productDescription () { return (".css-egoftb > p") }
     
 
     /**
-     * @returns the input field for the username
+     * @returns the product image
      */
-     get emailInput () { return ("#1-email") }
-    
+    get productImage () { return ("li[class='slide selected previous'] div") }
+
 
     /**
-     * @returns the input field for the password
+     * @returns the product category
      */
-    get passwordInput () { return ("#1-password") }
+    get productCategory () { return ("div[class='chakra-stack css-egoftb'] span[class='css-1ccau2i']") }
 
-    
+
     /**
-     * @returns the button to log in
+     * @returns the button that returns the user to the home ppage
      */
-    get submitButton () { return ("#1-submit") }
+    get backButton () { return (".chakra-heading.css-18j379d") }
+
+
+    /**
+     * @returns the add-to-cart button
+     */
+    get addToCartButton () { return ("#add-to-cart") }
 
      
-    /**
-     * @returns the error message for email
-     */
-    get emailError () { return ("#auth0-lock-error-msg-email") }
-
-
-    /**
-     * @returns the error message for password
-     */
-    get passwordError () { return ("#auth0-lock-error-msg-password") }
-
-
-    /**
-     * @returns the error message for existing email
-     */
-    get existingEmailError () { return ("div.auth0-lock-content-body-wrapper > div:nth-child(1) > div > div > span > span") }
-
-
-    /**
-     * @returns the error message for invalid login
-     */
-    get invalidLoginError () { return ("div.auth0-lock-content-body-wrapper > div:nth-child(1) > div > div > span > span") }
-
 
     // METHODS
 
     /**
-     * Adds an item to cart
-     * @param {Number} itemNo nth item in the list
+     * Add product to cart
+     * @param {Number} quantity number of products required
+     * @returns a list containing the product name and price
      */
-     addToCart (itemNo) {
-        cy.get(`css-12qzrsi > : nth-child(${itemNo}) button`).click()
-    }
-
-    /**
-     * Adds an item to cart
-     * @param {Number} itemNo nth item in the list
-     */
-    getProductName (itemNo) {
-        cy.get(`css-12qzrsi > : nth-child(${itemNo}) button`).click()
+    addToCart (quantity) {
+        cy.get(this.productQuantity).clear()
+        cy.get(this.productQuantity).type(quantity)
+        cy.get(this.addToCartButton).click()
     }
 
 }
-export default new Product()
+export default new Details()
