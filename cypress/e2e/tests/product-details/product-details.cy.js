@@ -24,6 +24,9 @@ describe('Product-details', () => {
         // assert that the user is logged in
         cy.get(homePage.title).should("contain", "Products")
         cy.get(homePage.firstProductCard).should("be.visible")
+        
+        // wait for the page to load
+        cy.wait(1000)
     })
 
     /**
