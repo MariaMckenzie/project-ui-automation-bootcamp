@@ -6,7 +6,7 @@ import homePage from "../../pages/home.page"
 import detailsPage from "../../pages/details.page"
 
 
-describe('Add-to-cart', () => {
+describe('Check add-to-cart functionality', () => {
     // variables
     let total
 
@@ -29,7 +29,6 @@ describe('Add-to-cart', () => {
   
     /**
      * Test Case ID: E2E_9
-     * Test Scenario: Check add-to-cart functionality
      */
     it('should verify that the user can add a product to the cart from the ‘products’ page', () => {
         // add product to cart
@@ -49,7 +48,6 @@ describe('Add-to-cart', () => {
     
     /**
      * Test Case ID: E2E_10
-     * Test Scenario: Check add-to-cart functionality
      */
     it('should verify that the user can add multiple products to the cart from the ‘products’ page', () => {
         // add multiple products to cart
@@ -84,7 +82,6 @@ describe('Add-to-cart', () => {
     
     /**
      * Test Case ID: E2E_11
-     * Test Scenario: Check add-to-cart functionality
      */
     it('should verify that the user can add an item to cart from the product’s information page', () => {
         // select product and visit product's information page 
@@ -109,7 +106,6 @@ describe('Add-to-cart', () => {
     
     /**
      * Test Case ID: E2E_12
-     * Test Scenario: Check add-to-cart functionality
      */
     it('should verify that the user can add add one item to cart from the ‘products’ page and add the same item again from the product’s information page', () => {
         //  add product to cart
@@ -147,7 +143,6 @@ describe('Add-to-cart', () => {
     
     /**
      * Test Case ID: E2E_13
-     * Test Scenario: Check add-to-cart functionality
      */
     it('should verify that the user can search for a product and add it to cart', () => {
         // search for item
@@ -166,7 +161,6 @@ describe('Add-to-cart', () => {
     
     /**
      * Test Case ID: E2E_14
-     * Test Scenario: Check add-to-cart functionality
      */
     it('should verify that the user can ause the direct link to the product’s information page and add the product to cart', () => {
         // go to product information page
@@ -192,13 +186,11 @@ describe('Add-to-cart', () => {
     
     /**
      * Test Case ID: E2E_15
-     * Test Scenario: Check add-to-cart functionality
      */
     it.skip('should verify that the user can add a product in ‘Favourites’ to cart', () => { })
     
     /**
      * Test Case ID: E2E_16
-     * Test Scenario: Check add-to-cart functionality
      */
     it('should verify that the user cannot add a product to cart with blank quantity', () => {
         // add product to cart with blank quantity
@@ -213,7 +205,6 @@ describe('Add-to-cart', () => {
 
     /**
      * Test Case ID: E2E_17
-     * Test Scenario: Check add-to-cart functionality
      */
     it('should verify that the user can only use numeric characters as input for quantity', () => {
         // add product to cart using invalid input 
