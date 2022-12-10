@@ -42,6 +42,18 @@ class Cart {
 
 
     /**
+     * @returns the button that decrements the product quantity
+     */
+    get decrementQuantity () { return ("button[title='Decrement quantity']") }
+
+
+    /**
+     * @returns the button that increments the product quantity
+     */
+    get incrementQuantity () { return ("button[title='Increment quantity']") }
+
+
+    /**
      * @returns the button that takes the user back to the cart
      */
     get backToHomeButton () { return (".snipcart-modal__close-title") }
@@ -89,10 +101,27 @@ class Cart {
     /**
      * Removes  the nth product card 
      * @param {Number} itemNo nth item in the list
-     * @returns the nth product card
      */
     removeProductFromCart (itemNo) {
         cy.get(`.snipcart-item-list.snipcart-scrollbar.snipcart-item-list--no-shadow > li:nth-child(${itemNo}) > div > div ${this.removeButton}`).click()
+    }
+
+    
+    /**
+     * Decrements the product quantity
+     * @param {Number} itemNo nth item in the list
+     */
+    decrementProductQuantity (itemNo) {
+        cy.get(`.snipcart-item-list.snipcart-scrollbar.snipcart-item-list--no-shadow > li:nth-child(${itemNo}) > div > div ${this.decrementQuantity}`).click()
+    }
+
+    
+    /**
+     * Increments the product quantity
+     * @param {Number} itemNo nth item in the list
+     */
+    incrementProductQuantity (itemNo) {
+        cy.get(`.snipcart-item-list.snipcart-scrollbar.snipcart-item-list--no-shadow > li:nth-child(${itemNo}) > div > div ${this.incrementQuantity}`).click()
     }
 
 
