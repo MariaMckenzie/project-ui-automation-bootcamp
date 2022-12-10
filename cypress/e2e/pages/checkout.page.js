@@ -3,7 +3,7 @@
 * Contains the locators and selectors found on the Checkout page. 
 */
 
-class Cart {
+class Checkout {
 
     /**
      * @returns the title of the page
@@ -71,6 +71,63 @@ class Cart {
     get cityError() { return ("div[data-for='city']") }
 
 
+    // PAYMENTS 
+
+    /**
+     * @returns the payment card
+     */
+    get paymentCard() { return (".snipcart-form.snipcart-payment.snipcart__box") }
+
+
+    /**
+     * @returns the payments title
+     */
+    get paymentTitle() { return (".snipcart-payment__header.snipcart__font--subtitle") }
+
+
+    /**
+     * @returns the input field for card number
+     */
+    get cardNumberInput() { return ("#card-number") }
+
+
+    /**
+     * @returns the input field for card expiry date
+     */
+    get expiryDateInput() { return ("#expiry-date") }
+
+
+    /**
+     * @returns the input field for card cvv
+     */
+    get cvvInput() { return ("#cvv") }
+
+
+    /**
+     * @returns the button to place the order and complete the checkout process
+     */
+    get placeOrderButton() { return ("button[type='submit']") }
+
+
+    /**
+     * @returns the button to edit billing information
+     */
+    get editBillingButton() { return ("div[class='snipcart-billing-completed__header snipcart__box--header'] button[type='button']") }
+
+
+    /**
+     * @returns the subtotal before tax
+     */
+    get subTotal() { return ("span[class='snipcart-summary-fees__amount']") }
+
+
+    /**
+     * @returns the customer's billing information
+     */
+    get customerInformation () { return (".snipcart-checkout-step__col:nth-child(1) > div > span")}
+
+
+
     // METHODS
 
     /**
@@ -80,18 +137,34 @@ class Cart {
      * @param {String[]} addr address - [address line 1, city, state, country, postal code]
      */
     addBillingInformation (name, email, addr) {
-        cy.get(this.nameInput).type(name)
-        cy.get(this.emailInput).type(email)
-        cy.get(this.address1Input).type(addr[0])
-        cy.get(this.cityInput).type(addr[1])
-        cy.get(this.stateInput).type(addr[2])
-        cy.get(this.countryInput).type(addr[3])
-        cy.get(this.postalCodeInput).type(addr[4])
-
-        cy.get(this.continueButton).click()
+        if (email === "" & addr[1] === "") {
+            cy.get(this.continueButton).click()
+        } else {
+            cy.get(this.nameInput).type(name)
+            cy.get(this.emailInput).type(email)
+            cy.get(this.address1Input).type(addr[0])
+            cy.get(this.cityInput).type(addr[1])
+            cy.get(this.stateInput).type(addr[2])
+            cy.get(this.countryInput).type(addr[3])
+            cy.get(this.postalCodeInput).type(addr[4])
+    
+            cy.get(this.continueButton).click()
+        }
     }
     
 
+    /**
+     * Fills card information
+     * @param {Number} cardNumber card number
+     * @param {Number} expiryDate card expiry date
+     * @param {Number} cvv card cvv
+     */
+    addCardInformation (cardNumber, expiryDate, cvv) {
+            cy.get(this.nameInput).type(`${cardNumber}`)
+            cy.get(this.emailInput).type(`${expiryDate}`)
+            cy.get(this.address1Input).type(`${cvv}`)
+            cy.get(this.placeOrderButton).click()
+    }
 
 }
-export default new Cart()
+export default new Checkout()
