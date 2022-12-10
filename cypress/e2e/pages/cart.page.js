@@ -53,6 +53,12 @@ class Cart {
     get cartTotal () { return (".snipcart-summary-fees__amount") }
 
 
+    /**
+     * @returns the checkout button
+     */
+    get checkoutButton () { return (".snipcart-button-primary.snipcart-base-button.is-icon-right") }
+
+
 
     // METHODS
 
