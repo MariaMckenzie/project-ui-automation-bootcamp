@@ -44,13 +44,31 @@ class Home {
     /**
      * @returns the product name
      */
-    get productName () { return (".css-1n64n71j") }
+    get productName () { return (".css-1oeb4ru") }
+
+
+    /**
+     * @returns the product image
+     */
+    get productImage () { return (".css-5ge9zd > .chakra-aspect-ratio") }
 
 
     /**
      * @returns the product price
      */
     get productPrice () { return (".css-0") }
+
+
+    /**
+     * @returns the add-to-cart button
+     */
+    get addToCartButton () { return ("#add-to-cart") }
+
+
+    /**
+     * @returns the searchbar
+     */
+    get searchBar () { return ("#search") }
 
 
 
@@ -68,7 +86,27 @@ class Home {
 
 
     /**
-     * Returns the name and price of the nth product card 
+     * Returns the name and price of the nth product 
+     * **(Note: The maximum number of products is 22)**
+     * @param {Number} itemNo nth item in the list
+     * @returns a list containing the product name and price
+     */
+    goToProductDetailsPage (itemNo) {
+        cy.get(`#product-${itemNo-1} > ${this.productImage}`).click()
+    }
+
+
+    /**
+     * Adds the nth item to favourites
+     * @param {Number} itemNo nth item in the list
+     */
+    addToFavourites (itemNo) {
+        cy.get(`#product-${itemNo-1} > ${this.productImage}`).click()
+    }
+
+
+    /**
+     * Returns the name and price of the nth product 
      * **(Note: The maximum number of products is 22)**
      * @param {Number} itemNo nth item in the list
      * @returns a list containing the product name and price
@@ -76,17 +114,30 @@ class Home {
     getProductCardData (itemNo) {
         return ([`#product-${itemNo-1} ${this.productName}`, `#product-${itemNo-1} ${this.productPrice}`])
     }
-
+    
 
     /**
-     * Sets the quantity of the product
+     * Add nth product to cart
      * **(Note: The maximum number of products is 22)**
      * @param {Number} itemNo nth item in the list
      * @param {Number} quantity number of products required
      * @returns a list containing the product name and price
      */
-    getProductCardData (itemNo, quantity) {
+    addToCart (itemNo, quantity) {
+        cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
         cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
+        cy.get(`#product-${itemNo-1} ${this.addToCartButton}`).click()
+    }
+
+
+    /**
+     * Search for product
+     * @param {String} key keyword for search
+     * @returns a list containing the product name and price
+     */
+    search (key) {
+        cy.get(this.searchBar).clear()
+        cy.get(this.searchBar).type(key)
     }
 
 }
