@@ -71,14 +71,14 @@ class Cart {
      * @returns the nth product card
      */
     getProductCard (itemNo) {
-        return (`${itemNo}`)
+        return (`${itemNo}`)  //TO BE FIXED
     }
 
 
     /**
-     * Returns the name and price of the nth product  
+     * Returns the name, quantity and price of the nth product  
      * @param {Number} itemNo nth item in the list
-     * @returns a list containing the product name, price and quantity
+     * @returns a list of selectors for the product name, price and quantity
      */
     getProductCardData (itemNo) {
         return (
