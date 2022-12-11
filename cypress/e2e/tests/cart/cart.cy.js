@@ -1,9 +1,8 @@
-import { product1, product13, product18, product2, product3, product4, product5, product6 } from "../../data/product.data"
+import { product1, product4, product6 } from "../../data/product.data"
 import { existingUser } from "../../data/user.data"
 import authenticationPage from "../../pages/authentication.page"
 import cartPage from "../../pages/cart.page"
 import homePage from "../../pages/home.page"
-import detailsPage from "../../pages/details.page"
 
 
 describe("Cart", () => {
