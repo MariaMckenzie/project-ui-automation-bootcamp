@@ -36,7 +36,7 @@ module.exports = {
     },
     product6: { 
         name: "Quality Hooded Sweatshirt", 
-        quantity: 1, 
+        quantity: 5, 
         price: 50, 
         desc: "Hanes Men's Sweatshirt, EcoSmart Fleece Crewneck Sweatshirt, Cotton-Blend Fleece Sweatshirt, Plush Fleece Pullover Sweatshirt",
         category: "shirt"
