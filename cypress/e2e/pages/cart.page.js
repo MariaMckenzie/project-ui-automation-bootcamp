@@ -42,6 +42,12 @@ class Cart {
 
 
     /**
+     * @returns the empty cart error
+     */
+    get emptyCartError () { return (".snipcart-empty-cart__title") }
+
+
+    /**
      * @returns the button that takes the user back to the cart
      */
     get backToHomeButton () { return (".snipcart-modal__close-title") }
@@ -86,6 +92,18 @@ class Cart {
                 `${this.productsList} > li:nth-child(${itemNo}) > div > div ${this.productPrice}`,
                 `${this.productsList} > li:nth-child(${itemNo}) > div > div ${this.productQuantity}`
             ])
+    }
+
+    /**
+     * Adds commas to large numbers to seperate it in thousands
+     * @param {*} num a number
+     * @returns 
+     */
+    numberWithCommas(num) {
+        if (num > 1000) {
+            return num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        }
+        return num
     }
 
 }
