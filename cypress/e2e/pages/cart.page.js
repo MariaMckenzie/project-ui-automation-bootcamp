@@ -1,6 +1,6 @@
 
 /**
-* Contains the locators and selectors found on the Cart/landing page. 
+* Contains the locators and selectors found on the Cart page. 
 */
 
 class Cart {
