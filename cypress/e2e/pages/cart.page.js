@@ -76,7 +76,13 @@ class Cart {
      */
     get totalProducts () { return (".snipcart-cart-header__option.snipcart-cart-header__count.snipcart__font--secondary.snipcart__font--bold") }
 
+    
+    /**
+     * @returns the checkout button
+     */
+    get checkoutButton () { return (".snipcart-button-primary.snipcart-base-button.is-icon-right") }
 
+    
 
     // METHODS
 
@@ -136,6 +142,19 @@ class Cart {
                 `${this.productsList} > li:nth-child(${itemNo}) > div > div ${this.productPrice}`,
                 `${this.productsList} > li:nth-child(${itemNo}) > div > div ${this.productQuantity}`
             ])
+    }
+
+    
+    /**
+     * Adds commas to large numbers to seperate it in thousands
+     * @param {*} num a number
+     * @returns 
+     */
+    numberWithCommas(num) {
+        if (num > 1000) {
+            return num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        }
+        return num
     }
 
 }
