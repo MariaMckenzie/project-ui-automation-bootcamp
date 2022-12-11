@@ -15,6 +15,9 @@ module.exports = defineConfig({
             overwrite: false,
             html: false,
             json: true
-        }
+        },
     },
+    env: {
+        CYPRESS_MAILSLURP_API_KEY: '9fcabbf7701d5e08fe4dcb65559a44ab360bbd5d70fcb6ab77b69f9626db41ca',
+    }
 });
