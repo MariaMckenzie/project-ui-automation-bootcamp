@@ -38,8 +38,8 @@ class Home {
     /**
      * @returns the input field for the product quantity
      */
-    get productQuantity () { return (".css-a8qclj") }
-
+    get productQuantity () { return ("input") }
+   // .css-n21gh5 > .css-46p1lt > .chakra-numberinput input
 
     /**
      * @returns the product name
@@ -124,9 +124,15 @@ class Home {
      * @returns a list containing the product name and price
      */
     addToCart (itemNo, quantity) {
-        cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
-        cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
-        cy.get(`#product-${itemNo-1} ${this.addToCartButton}`).click()
+        if (quantity !== "" ||  isNaN(quantity) == true) {
+            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
+            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
+            cy.get(`#product-${itemNo-1} ${this.addToCartButton}`).click()
+        }
+        else {
+            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
+            cy.get(`#product-${itemNo-1} ${this.addToCartButton}`).click()
+        }
     }
 
 
