@@ -8,7 +8,7 @@ class Details {
     /**
      * @returns the input field for the product quantity
      */
-    get productQuantity () { return (".chakra-numberinput__field .css-a8qclj") }
+    get productQuantity () { return (".chakra-numberinput__field") }
 
 
     /**
