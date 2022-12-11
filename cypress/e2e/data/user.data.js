@@ -7,7 +7,6 @@ module.exports = {
     existingUser: {
         email: "johndoe1@mail.com",
         password: "P@ssword1",
-        errorMsg: "Wrong email or password"
     },
     nonexistingUser: {
         email: "jd14@mail.com",
