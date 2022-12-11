@@ -179,7 +179,7 @@ describe('Authentication', () => {
      * Test Case ID: E2E_7
      * Test Scenario: Check login functionality
      */    
-     it.skip('should verify that the user cannot login using an email address that does not exist', () => {
+     it('should verify that the user cannot login using an email address that does not exist', () => {
         cy.get(authenticationPage.signInOrRegisterButton).click()
         
         // wait for the page to load
