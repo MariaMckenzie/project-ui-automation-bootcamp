@@ -27,7 +27,7 @@ describe("Product Details", () => {
     })
 
     /**
-     * Test Case ID: E2E_35
+     * Test Case ID: E2E_36
      * Test Scenario: Check the functionality and UI of the product details page
      */
     it("should verify that the navigation bar is visible", () => {
@@ -54,7 +54,7 @@ describe("Product Details", () => {
     })
 
     /**
-     * Test Case ID: E2E_36
+     * Test Case ID: E2E_37
      * Test Scenario: Check the functionality and UI of the product details page
      */
     it("should verify that the store’s name and logo are visible at the top of the page", () => {
@@ -70,7 +70,7 @@ describe("Product Details", () => {
     })
 
     /**
-     * Test Case ID: E2E_37
+     * Test Case ID: E2E_38
      * Test Scenario: Check the functionality and UI of the product details page
      */
     it("should verify that none of the navigation links/buttons are highlighted", () => {
@@ -108,7 +108,7 @@ describe("Product Details", () => {
     
 
     /**
-     * Test Case ID: E2E_38
+     * Test Case ID: E2E_39
      * Test Scenario: Check the functionality and UI of the product details page
      */
     it("should verify that the user can sign out successfully", () => {
@@ -125,7 +125,7 @@ describe("Product Details", () => {
     })
 
     /**
-     * Test Case ID: E2E_39
+     * Test Case ID: E2E_40
      * Test Scenario: Check the functionality and UI of the product details page
      * Note: Test does not work, instead it goes back to the authentication page
      */
@@ -143,7 +143,7 @@ describe("Product Details", () => {
     })
 
     /**
-     * Test Case ID: E2E_40
+     * Test Case ID: E2E_41
      * Test Scenario: Check the functionality and UI of the product details page
      */
     it("should verify that the user can view the product images", () => {
@@ -154,7 +154,7 @@ describe("Product Details", () => {
     })
 
     /**
-     * Test Case ID: E2E_41
+     * Test Case ID: E2E_42
      * Test Scenario: Check the functionality and UI of the product details page
      */
     it("should verify that the user can view the name and details of the product", () => {
@@ -174,7 +174,7 @@ describe("Product Details", () => {
     })
 
     /**
-     * Test Case ID: E2E_42
+     * Test Case ID: E2E_43
      * Test Scenario: Check the functionality and UI of the product details page
      */
     it("should verify that the user can modify the product quantity using numbers", () => {
@@ -192,7 +192,7 @@ describe("Product Details", () => {
     })
 
     /**
-     * Test Case ID: E2E_43
+     * Test Case ID: E2E_44
      * Test Scenario: Check the functionality and UI of the product details page
      */
     it("should verify that the user cannot modify the quantity of a product with non-numeric characters", () => { 
