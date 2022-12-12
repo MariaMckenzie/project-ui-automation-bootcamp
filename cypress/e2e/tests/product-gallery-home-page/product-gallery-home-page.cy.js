@@ -36,8 +36,7 @@ describe('Product Gallery (Home Page)', () => {
      */
     it("should verify that the ‘Home’ button is active", () => {
         // assert that the home button is visible
-        cy.get(homePage.homeButton)
-            
+        cy.get(homePage.homeButton)            
             .should("be.visible")
             .and("contain.text", "Home")
             .and("have.css", "background-color", "rgb(49, 151, 149)") // button background colour
@@ -49,11 +48,11 @@ describe('Product Gallery (Home Page)', () => {
      * Test Scenario: Check the functionality and UI of the product home page
      */
     it("should verify that the navigation bar is visible", () => {
-        // check for navbar
+        // assert that the nav bar is visible
         cy.get(homePage.navBar)
             .should("be.visible")
 
-        // check for the buttons in the nav bar
+        // assert that the buttons in the nav bar are visible - (home, about, contact, cart, sign out)
         cy.get(homePage.homeButton)
             .should("be.visible")
             .and("contain.text", "Home")
@@ -73,11 +72,11 @@ describe('Product Gallery (Home Page)', () => {
      * Test Scenario: Check the functionality and UI of the product home page
      */
     it("should verify that the store’s name and logo are visible at the top of the page", () => {        
-        // check for navbar
+        // assert that the nav bar is visible
         cy.get(homePage.navBar)
             .should("be.visible")
         
-        // check for logo and store name
+        // assert that the logo and store name are visible
         cy.get(homePage.storeName)
             .should("be.visible")
             .and("contain", "Automation Camp Store")
@@ -91,13 +90,39 @@ describe('Product Gallery (Home Page)', () => {
      * Test Scenario: Check the functionality and UI of the product home page
      */
     it("should verify that the user can sign out successfully", () => {
-        // check for the logout button
+        // assert that the sign out button is visible
         cy.get(homePage.logoutButton)
             .should("be.visible")
             .and("contain.text", "Sign Out")
 
         // logout
         cy.get(homePage.logoutButton).click()
+
+        // assert that the user is signed out
+        cy.url()
+            .should("eq", "https://ui-automation-camp.vercel.app/")
+    })
+
+    /**
+     * Test Case ID: E2E_30
+     * Test Scenario: Check the functionality and UI of the product home page
+     */
+    it("should verify that the search bar, and sort and filter options are visible.", () => {
+        // check for the first product 
+        cy.get(homePage.getProductCard(1))
+            .should("be.visible")
+            .and("contain.text", product1.name)
+
+        // check for other products
+        cy.get(homePage.getProductCard(5))
+            .should("be.visible")
+            .and("contain.text", product5.name)
+        cy.get(homePage.getProductCard(17))
+            .should("be.visible")
+            .and("contain.text", product17.name)
+        cy.get(homePage.getProductCard(22))
+            .should("be.visible") // last product
+            .and("contain.text", product22.name)
     })
 
     /**
