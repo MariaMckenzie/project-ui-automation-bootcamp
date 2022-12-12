@@ -36,7 +36,7 @@ module.exports = {
     },
     product6: { 
         name: "Quality Hooded Sweatshirt", 
-        quantity: 1, 
+        quantity: 5, 
         price: 50, 
         desc: "Hanes Men's Sweatshirt, EcoSmart Fleece Crewneck Sweatshirt, Cotton-Blend Fleece Sweatshirt, Plush Fleece Pullover Sweatshirt",
         category: "shirt"
@@ -113,9 +113,9 @@ module.exports = {
     },
     product17: { 
         name: "Red Couch", 
-        quantity: 1, 
+        quantity: 2, 
         price: 320, 
-        desc: "",
+        desc: "ZINUS Mikhail Sofa Couch / Ruby Red Sofa / Button Tufted Cushions / Easy, Tool-Free Assembly",
         category: "couch"
     },
     product18: { 
