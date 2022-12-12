@@ -4,96 +4,101 @@
 */
 
 class Home {
-
+    
     /**
-     * @returns the button that logs out the user
+     * @returns the selector for the navigation bar
      */
-    get logoutButton () { return ("#top-sign-out") }
+    get navBar () { return ("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2)") }
 
 
     /**
-     * @returns the button that displays the cart
-     */
-    get cartButton () { return ("#top-cart") }
-
-
-    /**
-     * @returns the button that takes the user to the contact page
-     */
-    get contactButton () { return ("#top-contact") }
-
-
-    /**
-     * @returns the title of the products section of the page
-     */
-    get title () { return (".chakra-heading.css-1jhlc8u") }
-
-
-    /**
-     * @returns the first product card
-     */
-    get firstProductCard () { return ("#product-0") }
-
-
-    /**
-     * @returns the input field for the product quantity
-     */
-    get productQuantity () { return ("input") }
-   // .css-n21gh5 > .css-46p1lt > .chakra-numberinput input
-
-    /**
-     * @returns the product name
-     */
-    get productName () { return (".css-1oeb4ru") }
-
-
-    /**
-     * @returns the product image
-     */
-    get productImage () { return (".css-5ge9zd > .chakra-aspect-ratio") }
-
-
-    /**
-     * @returns the product price
-     */
-    get productPrice () { return (".css-0") }
-
-
-    /**
-     * @returns the add-to-cart button
-     */
-    get addToCartButton () { return ("#add-to-cart") }
-
-
-    /**
-     * @returns the searchbar
-     */
-    get searchBar () { return ("#search") }
-
-
-    /**
-     * @returns the store name
+     * @returns the selector for the store name
      */
     get storeName () { return (".chakra-heading.css-kmq9po") }
 
 
     /**
-     * @returns the image with store logo
+     * @returns the selector for the image with store logo
      */
     get storeImage () { return (".chakra-image.css-0") }
-
-
-    /**
-     * @returns the navigation bar
-     */
-    get navBar () { return ("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2)") }
     
 
     /**
-     * @returns the button that takes the user to the home page
+     * @returns the selector for the button linked to the home page
      */
     get homeButton () { return ("#top-home") }
 
+
+    /**
+     * @returns the selector for the button linked to the about page
+     */
+    get aboutButton () { return ("#top-about") }
+
+
+    /**
+     * @returns the selector for the button linked to the contact page
+     */
+    get contactButton () { return ("#top-contact") }
+    
+
+    /**
+     * @returns the selector for the button linked to the cart page
+     */
+    get cartButton () { return ("#top-cart") }
+
+
+    /**
+     * @returns the selector for the button that logs out the user
+     */
+    get logoutButton () { return ("#top-sign-out") }
+
+
+    /**
+     * @returns the selector for the title of the products section of the page
+     */
+    get title () { return (".chakra-heading.css-1jhlc8u") }
+
+
+    /**
+     * @returns the selector for the first product card
+     */
+    get firstProductCard () { return ("#product-0") }
+
+
+    /**
+     * @returns the selector for the product quantity input field
+     */
+    get productQuantity () { return ("input") }
+
+
+    /**
+     * @returns the selector for the product name
+     */
+    get productName () { return (".css-1oeb4ru") }
+
+
+    /**
+     * @returns the selector for the product image
+     */
+    get productImage () { return (".css-5ge9zd > .chakra-aspect-ratio") }
+
+
+    /**
+     * @returns the selector for the product price
+     */
+    get productPrice () { return (".css-0") }
+
+
+    /**
+     * @returns the selector for the add-to-cart button
+     */
+    get addToCartButton () { return ("#add-to-cart") }
+
+
+    /**
+     * @returns the selector for the searchbar
+     */
+    get searchBar () { return ("#search") }
 
 
     // METHODS
@@ -110,10 +115,9 @@ class Home {
 
 
     /**
-     * Returns the name and price of the nth product 
+     * Go to the nth product details page
      * **(Note: The maximum number of products is 22)**
      * @param {Number} itemNo nth item in the list
-     * @returns a list containing the product name and price
      */
     goToProductDetailsPage (itemNo) {
         cy.get(`#product-${itemNo-1} > ${this.productImage}`).click()
