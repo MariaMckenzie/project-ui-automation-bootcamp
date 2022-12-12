@@ -38,8 +38,8 @@ class Home {
     /**
      * @returns the input field for the product quantity
      */
-    get productQuantity () { return (".css-a8qclj") }
-
+    get productQuantity () { return ("input") }
+   // .css-n21gh5 > .css-46p1lt > .chakra-numberinput input
 
     /**
      * @returns the product name
@@ -69,6 +69,30 @@ class Home {
      * @returns the searchbar
      */
     get searchBar () { return ("#search") }
+
+
+    /**
+     * @returns the store name
+     */
+    get storeName () { return (".chakra-heading.css-kmq9po") }
+
+
+    /**
+     * @returns the image with store logo
+     */
+    get storeImage () { return (".chakra-image.css-0") }
+
+
+    /**
+     * @returns the navigation bar
+     */
+    get navBar () { return ("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2)") }
+    
+
+    /**
+     * @returns the button that takes the user to the home page
+     */
+    get homeButton () { return ("#top-home") }
 
 
 
@@ -124,9 +148,33 @@ class Home {
      * @returns a list containing the product name and price
      */
     addToCart (itemNo, quantity) {
-        cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
-        cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
-        cy.get(`#product-${itemNo-1} ${this.addToCartButton}`).click()
+        if (quantity !== "" ||  isNaN(quantity) == true) {
+            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
+            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
+            cy.get(`#product-${itemNo-1} ${this.addToCartButton}`).click()
+        }
+        else {
+            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
+            cy.get(`#product-${itemNo-1} ${this.addToCartButton}`).click()
+        }
+    }
+
+    
+    /**
+     * Modify the nth product to cart
+     * **(Note: The maximum number of products is 22)**
+     * @param {Number} itemNo nth item in the list
+     * @param {Number} quantity number of products required
+     * @returns a list containing the product name and price
+     */
+    modifyQuantity (itemNo, quantity) {
+        if (quantity !== "" ||  isNaN(quantity) == true) {
+            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
+            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
+        }
+        else {
+            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
+        }
     }
 
 
