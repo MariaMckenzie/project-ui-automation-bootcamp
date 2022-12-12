@@ -113,9 +113,9 @@ module.exports = {
     },
     product17: { 
         name: "Red Couch", 
-        quantity: 1, 
+        quantity: 2, 
         price: 320, 
-        desc: "",
+        desc: "ZINUS Mikhail Sofa Couch / Ruby Red Sofa / Button Tufted Cushions / Easy, Tool-Free Assembly",
         category: "couch"
     },
     product18: { 
