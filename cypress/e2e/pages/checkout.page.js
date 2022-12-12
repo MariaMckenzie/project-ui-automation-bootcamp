@@ -1,72 +1,72 @@
 
 /**
-* Contains the locators and selectors found on the Checkout page. 
+* Contains the locators and selectors found on the checkout page. 
 */
 
 class Checkout {
 
     /**
-     * @returns the title of the page
+     * @returns the selector for the title of the page
      */
     get title () { return (".snipcart__font--subtitle") }
 
 
     /**
-     * @returns the input field for name
+     * @returns the selector for the input field for name
      */
     get nameInput () { return ("input[name='name']") }
 
 
     /**
-     * @returns the input field for email
+     * @returns the selector for the input field for email
      */
     get emailInput () { return ("input[name='email']") }
 
 
     /**
-     * @returns the input field for address 1
+     * @returns the selector for the input field for address 1
      */
     get address1Input () { return ("input[name='address1']") }
 
 
     /**
-     * @returns the input field for city
+     * @returns the selector for the input field for city
      */
     get cityInput () { return ("input[name='city']") }
 
     
     /**
-     * @returns the input field for country
+     * @returns the selector for the input field for country
      */
     get countryInput () { return ("div[class='snipcart-form__field'] div[class='snipcart-textbox snipcart__font--bold snipcart__font--secondary snipcart-form__select'] input") }
 
 
     /**
-     * @returns the input field for state
+     * @returns the selector for the input field for state
      */
     get stateInput () { return ("div[class='snipcart-form__field snipcart-form__cell--large'] div[class='snipcart-typeahead'] div[class='snipcart-textbox snipcart__font--bold snipcart__font--secondary snipcart-form__select'] input") }
 
 
     /**
-     * @returns the input field for postal/zip code
+     * @returns the selector for the input field for postal/zip code
      */
     get postalCodeInput () { return ("input[name='postalCode']") }
 
 
     /**
-     * @returns the button to proceed to the next step of checkout process
+     * @returns the selector for the button to proceed to the next step of checkout process
      */
     get continueButton() { return ("button[type='submit']") }
 
 
     /**
-     * @returns the missing email error
+     * @returns the selector for the missing email error
      */
     get emailError() { return ("div[data-for='email']") }
 
 
     /**
-     * @returns the missing city error
+     * @returns the selector for the missing city error
      */
     get cityError() { return ("div[data-for='city']") }
 
@@ -74,55 +74,55 @@ class Checkout {
     // PAYMENTS 
 
     /**
-     * @returns the payment card
+     * @returns the selector for the payment card
      */
     get paymentCard() { return (".snipcart-form.snipcart-payment.snipcart__box") }
 
 
     /**
-     * @returns the payments title
+     * @returns the selector for the payments title
      */
     get paymentTitle() { return (".snipcart-payment__header.snipcart__font--subtitle") }
 
 
     /**
-     * @returns the input field for card number
+     * @returns the selector for the input field for card number
      */
     get cardNumberInput() { return ("#card-number") }
 
 
     /**
-     * @returns the input field for card expiry date
+     * @returns the selector for the input field for card expiry date
      */
     get expiryDateInput() { return ("#expiry-date") }
 
 
     /**
-     * @returns the input field for card cvv
+     * @returns the selector for the input field for
      */
     get cvvInput() { return ("#cvv") }
 
 
     /**
-     * @returns the button to place the order and complete the checkout process
+     * @returns the selector for the button to place the order and complete the checkout process
      */
     get placeOrderButton() { return ("button[type='submit']") }
 
 
     /**
-     * @returns the button to edit billing information
+     * @returns the selector for the button to edit billing information
      */
     get editBillingButton() { return ("div[class='snipcart-billing-completed__header snipcart__box--header'] button[type='button']") }
 
 
     /**
-     * @returns the subtotal before tax
+     * @returns the selector for the subtotal before tax
      */
     get subTotal() { return ("span[class='snipcart-summary-fees__amount']") }
 
 
     /**
-     * @returns the customer's billing information
+     * @returns the selector for the customer's billing information
      */
     get customerInformation () { return (".snipcart-checkout-step__col:nth-child(1) > div > span")}
 
