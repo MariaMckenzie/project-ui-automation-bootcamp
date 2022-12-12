@@ -124,8 +124,8 @@ describe('Add-to-cart', () => {
      * Test Case ID: E2E_12
      * Test Scenario: Check add-to-cart functionality
      */
-    it('should verify that the user can add an item to cart from the product’s information page', () => {
-        // select product and visit product's information page 
+    it('should verify that the user can add an item to cart from the product details page', () => {
+        // select product and visit product details page 
         homePage.goToProductDetailsPage(1)
         cy.wait(500)
 
@@ -155,7 +155,7 @@ describe('Add-to-cart', () => {
      * Test Case ID: E2E_13
      * Test Scenario: Check add-to-cart functionality
      */
-    it('should verify that the user can add add one item to cart from the ‘products’ page and add the same item again from the product’s information page', () => {
+    it('should verify that the user can add add one item to cart from the ‘products’ page and add the same item again from the product details page', () => {
         //  add product to cart
         homePage.addToCart(5, product5.quantity)
         
@@ -176,7 +176,7 @@ describe('Add-to-cart', () => {
         cartPage.closeCart()
         cy.get(homePage.cartButton).should("have.text", `$${product5.quantity * product5.price}.00`) // check price
 
-        // select product and visit product's information page 
+        // select product and visit product details page 
         homePage.goToProductDetailsPage(5)
 
         // wait for the page to load
@@ -227,7 +227,7 @@ describe('Add-to-cart', () => {
      * Test Case ID: E2E_15
      * Test Scenario: Check add-to-cart functionality
      */
-    it('should verify that the user can ause the direct link to the product’s information page and add the product to cart', () => {
+    it('should verify that the user can ause the direct link to the product details page and add the product to cart', () => {
         // go to product information page
         cy.visit("https://ui-automation-camp.vercel.app/products/quality-mousepad")
 
