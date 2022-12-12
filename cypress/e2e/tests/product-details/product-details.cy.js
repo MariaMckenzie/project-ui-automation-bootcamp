@@ -5,14 +5,24 @@ import homePage from "../../pages/home.page"
 import detailsPage from "../../pages/details.page"
 
 
-describe('Product-details', () => {
+describe('Product Details', () => {
     // variables
     let total
-
+    // Verifies that the user can view the name and details of the product.
+    // Verifies that the product details are consistent with the information on the home page.
+    // Verifies that the user can view the product images.
+    // Verifies that the navigation bar is visible.
+    // Verifies that the store’s name and logo are visible at the top of the page.
+    // Verifies that the user can sign out successfully.
+    // Verifies that none of the navigation links/buttons are highlighted.
+    // Verifies that the user can modify the product quantity using numbers.
+    // Verifies that the user cannot enter non-numeric characters as input for quantity.
+    
     beforeEach(() => {
         cy.clearCookies() // clear all cookies before starting the tests
         cy.visit('/')
 
+        // go to authentication page
         cy.get(authenticationPage.signInOrRegisterButton).click()
 
         // wait for the page to load
@@ -22,103 +32,160 @@ describe('Product-details', () => {
         authenticationPage.loginOrSignup(existingUser.email, existingUser.password)
 
         // assert that the user is logged in
-        cy.get(homePage.title).should("contain", "Products")
-        cy.get(homePage.firstProductCard).should("be.visible")
+        cy.get(homePage.title)
+            .should("contain", "Products")
+        cy.get(homePage.firstProductCard)
+            .should("be.visible")
         
         // wait for the page to load
         cy.wait(1000)
+
+        // go to a product page
+        
     })
 
     /**
-     * Test Case ID: E2E_
+     * Test Case ID: E2E_26
      * Test Scenario: Check the functionality and UI of the product details page
      */
-    it('should verify that the user can view the name and details of the product', () => {
-        // select product and visit product's information page 
-        homePage.goToProductDetailsPage(4)
-
-        // assert that the user is on the product information page
-        cy.url().should("contain", "quality-mug")
-        cy.get(detailsPage.productName).should("contain", product4.name)
-        cy.get(detailsPage.productDescription).should("contain", product4.desc)
-        cy.get(detailsPage.productPrice).should("contain", `$${product4.price}.00`)   
+    it("should verify that the ‘Home’ button is active", () => {
+        // assert that the home button is visible
+        cy.get(homePage.homeButton)
+            .should("be.visible")
+            .and("contain.text", "Home")
+            .and("have.css", "background-color", "rgb(49, 151, 149)") // button background colour
+            .and("have.css", "color", "rgb(255, 255, 255)") // text colour
     })
 
     /**
-     * Test Case ID: E2E_
+     * Test Case ID: E2E_27
      * Test Scenario: Check the functionality and UI of the product details page
      */
-    it('should verify that the user cannot modify the name nor details of the product', () => {
-        // select product and visit product's information page 
-        homePage.goToProductDetailsPage(4)
+    it("should verify that the navigation bar is visible", () => {
+        // check for navbar
+        cy.get(homePage.navBar).should("be.visible")
 
-        // assert that the user cannpt modify the data
-        cy.url().should("contain", "quality-mug")
-        cy.get(detailsPage.productName).should("not.change")
-        cy.get(detailsPage.productDescription).should("not.change")
+        // check for the buttons in the nav bar
+        cy.get(homePage.homeButton).should("be.visible")
+            .and("contain.text", "Home")
+        cy.get(homePage.contactButton).should("be.visible")
+            .and("contain.text", "Contact")
+        cy.get(homePage.cartButton).should("be.visible")
+            .and("contain.text", "0.00")
+        cy.get(homePage.logoutButton).should("be.visible")
+            .and("contain.text", "Sign Out")
     })
 
     /**
-     * Test Case ID: E2E_
+     * Test Case ID: E2E_28
      * Test Scenario: Check the functionality and UI of the product details page
      */
-    it('should verify that the user can modify the product quantity using numbers', () => {
-        // select product and visit product's information page 
-        homePage.goToProductDetailsPage(4)
-
-        // assert that the user is on the product information page
-        cy.url().should("contain", "quality-mug")
-        cy.get(detailsPage.productName).should("contain", product4.name)
-        cy.get(detailsPage.productDescription).should("contain", product4.desc)
-        cy.get(detailsPage.productPrice).should("contain", `$${product4.price}.00`)   
-
-        // modify product quantity using numbers 
-        cy.get(detailsPage.productQuantity).type(product4.quantity)
-
-        // assert that the product quantity can be modified using numbers
-        cy.get(detailsPage.productQuantity).should("have.text", `${product4.quantity}`)
-                                                                .should("not.contain.text", "1")
+    it("should verify that the store’s name and logo are visible at the top of the page", () => {        
+        // check for navbar
+        cy.get(homePage.navBar).should("be.visible")
+        
+        // check for logo and store name
+        cy.get(homePage.storeName).should("be.visible")
+            .and("contain", "Automation Camp Store")
+        cy.get(homePage.storeImage).should("be.visible")
+            .and("have.attr", "src", "/favicon.ico")
     })
 
     /**
-     * Test Case ID: E2E_
+     * Test Case ID: E2E_29
      * Test Scenario: Check the functionality and UI of the product details page
      */
-    it('should verify that the user cannot enter non-numeric characters as input for quantity', () => {
-        // select product and visit product's information page 
-        homePage.goToProductDetailsPage(4)
+    it("should verify that the user can sign out successfully", () => {
+        // check for the logout button
+        cy.get(homePage.logoutButton).should("be.visible")
+            .and("contain.text", "Sign Out")
 
-        // assert that the user is on the product information page
-        cy.url().should("contain", "quality-mug")
-        cy.get(detailsPage.productName).should("contain", product4.name)
-        cy.get(detailsPage.productDescription).should("contain", product4.desc)
-        cy.get(detailsPage.productPrice).should("contain", `$${product4.price}.00`)   
-
-        // modify product quantity using non-numeric character
-        cy.get(detailsPage.productQuantity).type("s")
-
-        // assert that the product quantity can be modified using numbers
-        cy.get(detailsPage.productQuantity).should("not.contain.text", "s")
-                                                                .should("have.text", "")
+        // logout
+        cy.get(homePage.logoutButton).click()
     })
 
     /**
-     * Test Case ID: E2E_
+     * Test Case ID: E2E_30
      * Test Scenario: Check the functionality and UI of the product details page
      */
-    it('should verify that the user can view the product images', () => {
-        // select product and visit product's information page 
-        homePage.goToProductDetailsPage(4)
+    it("should verify that the user can view all products in the inventory", () => {
+        // check for the first product 
+        cy.get(homePage.getProductCard(1)).should("be.visible")
+            .and("contain.text", product1.name)
 
-        // assert that the user is on the product information page
-        cy.url().should("contain", "quality-mug")
-        cy.get(detailsPage.productName).should("contain", product4.name)
-        cy.get(detailsPage.productDescription).should("contain", product4.desc)
-        cy.get(detailsPage.productPrice).should("contain", `$${product4.price}.00`)   
-
-        //assert that the user can view the product images
-        cy.get(detailsPage.productImage).should("exist")
-                                                            .should("be.visible")
+        // check for other products
+        cy.get(homePage.getProductCard(5)).should("be.visible")
+            .and("contain.text", product5.name)
+        cy.get(homePage.getProductCard(17)).should("be.visible")
+            .and("contain.text", product17.name)
+        cy.get(homePage.getProductCard(22)).should("be.visible") // last product
+            .and("contain.text", product22.name)
     })
-    
+
+    /**
+     * Test Case ID: E2E_31
+     * Test Scenario: Check the functionality and UI of the product details page
+     */
+    it("should verify that the user can select a product", () => {
+        // check for a product
+        cy.get(homePage.getProductCard(5)).should("be.visible")
+            .and("contain.text", product5.name)
+
+        // select the product
+        homePage.goToProductDetailsPage(5)
+
+        // assert that the user is redirected to the product details page 
+        cy.url().should("contain", "quality-pillow")
+        cy.get(detailsPage.productName).should("contain.text", product5.name)
+    })
+
+    /**
+     * Test Case ID: E2E_32
+     * Test Scenario: Check the functionality and UI of the product details page
+     */
+    it("should verify that the user can view the total of their cart", () => {
+        // add product to cart
+        homePage.addToCart(19, product19.quantity)
+
+        // calculate total
+        total = product19.price * product19.quantity
+
+        // close cart and check the price displayed on home page
+        cartPage.closeCart()
+        cy.get(homePage.cartButton).should("have.text", `$${total}.00`) // check price
+    })
+
+    /**
+     * Test Case ID: E2E_33
+     * Test Scenario: Check the functionality and UI of the product details page
+     */
+    it("should verify that the user can modify the quantity of a product using numeric characters", () => {
+        // check that the default quantity is 1
+        cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`).should("contain.value", 1)
+
+        // modify quantity
+        homePage.modifyQuantity(13, product13.quantity)
+
+        // check that the quantity has changed and is not equal to 1 (default)
+        cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`).should("contain.value", product13.quantity)
+        cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`).should("not.contain", "1")
+    })
+
+    /**
+     * Test Case ID: E2E_34
+     * Test Scenario: Check the functionality and UI of the product details page
+     */
+    it("should verify that the user cannot modify the quantity of a product with non-numeric characters", () => {  
+        // check that the default quantity is 1
+        cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`).should("contain.value", 1)
+
+        // add product to cart using invalid input 
+        homePage.addToCart(13, "a")
+        cy.once('uncaught:exception', () => false);
+
+        // check that the quantity input has now become blank
+        cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`).should("have.text", "")
+        cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`).should("not.contain", "1")
+    })
+
 })
