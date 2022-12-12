@@ -62,7 +62,7 @@ class Details {
     /**
      * @returns the product image
      */
-    get productImage () { return ("li[class='slide selected previous'] div") }
+    get productImage () { return ("li[class='slide selected previous'] div img") }
     
 
     /**
@@ -85,7 +85,7 @@ class Details {
     /**
      * @returns the input field for the product quantity
      */
-    get productQuantity () { return (".chakra-numberinput__field .css-a8qclj") }
+    get productQuantity () { return (".chakra-numberinput__field") }
 
 
     /**
