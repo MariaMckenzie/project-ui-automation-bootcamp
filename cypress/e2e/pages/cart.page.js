@@ -48,6 +48,12 @@ class Cart {
 
 
     /**
+     * @returns the selector for the button that takes the user to checkout
+     */
+    get checkoutButton () { return (".snipcart-button-primary.snipcart-base-button.is-icon-right") }
+
+
+    /**
      * @returns the selector for the subtotal of all products in the cart
      */
     get cartTotal () { return (".snipcart-summary-fees__amount") }
