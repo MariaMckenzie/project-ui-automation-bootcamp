@@ -1,6 +1,6 @@
 
 /**
-* Contains the locators and selectors found on the product page. 
+* Contains the locators and selectors found on the product details page. 
 */
 
 class Details {
