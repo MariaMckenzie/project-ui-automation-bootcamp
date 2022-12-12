@@ -116,8 +116,12 @@ describe("Product Details", () => {
         cy.get(detailsPage.logoutButton).should("be.visible")
             .and("contain.text", "Sign Out")
 
-        // logout
-        cy.get(detailsPage.logoutButton).click()
+            // logout
+            cy.get(detailsPage.logoutButton).click()
+    
+            // assert that the user is signed out
+            cy.url()
+                .should("eq", "https://ui-automation-camp.vercel.app/")
     })
 
     /**
