@@ -6,6 +6,24 @@
 class Home {
 
     /**
+     * @returns the store name
+     */
+    get storeName () { return (".chakra-heading.css-kmq9po") }
+
+
+    /**
+     * @returns the image with store logo
+     */
+    get storeImage () { return (".chakra-image.css-0") }
+
+
+    /**
+     * @returns the navigation bar
+     */
+    get navBar () { return ("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2)") }
+
+
+    /**
      * @returns the button that logs out the user
      */
     get logoutButton () { return ("#top-sign-out") }
