@@ -1,62 +1,62 @@
 
 /**
-* Contains the locators and selectors found on the Cart/landing page. 
+* Contains the locators and selectors found on the cart page. 
 */
 
 class Cart {
 
     /**
-     * @returns the title of the cart
+     * @returns the selector for the title of the cart
      */
     get title () { return (".snipcart-cart-header__title") }
 
 
     /**
-     * @returns the first product card (the last product added)
+     * @returns the selector for the first product card (the last product added)
      */
     get firstProductCard () { return (".snipcart-item-list.snipcart-scrollbar.snipcart-item-list--no-shadow > li:nth-child(1) > div > div") }
 
 
     /**
-     * @returns the input field for the product quantity
+     * @returns the selector for the product list
      */
     get productsList () { return (".snipcart-item-list.snipcart-scrollbar.snipcart-item-list--no-shadow") }
 
 
     /**
-     * @returns the product name
+     * @returns the selector for the product name
      */
     get productName () { return (".snipcart-item-line__title") }
 
 
     /**
-     * @returns the product price
+     * @returns the selector for the product price
      */
     get productPrice () { return (".snipcart-item-quantity__total-price") }
 
 
     /**
-     * @returns the product quantity
+     * @returns the selector for the product quantity
      */
     get productQuantity () { return (".snipcart-item-quantity__quantity") }
 
 
     /**
-     * @returns the button that takes the user back to the cart
+     * @returns the selector for the button that closes the cart
      */
     get backToHomeButton () { return (".snipcart-modal__close-title") }
 
 
     /**
-     * @returns the subtotal of all products in the cart
+     * @returns the selector for the subtotal of all products in the cart
      */
     get cartTotal () { return (".snipcart-summary-fees__amount") }
 
 
     /**
-     * @returns the checkout button
+     * @returns the selector for the cart error
      */
-    get checkoutButton () { return (".snipcart-button-primary.snipcart-base-button.is-icon-right") }
+    get cartError () { return (".snipcart-empty-cart__title.snipcart__font--secondary.snipcart__font--xlarge.snipcart__font--bold") }
 
 
 
@@ -71,20 +71,20 @@ class Cart {
     
     
     /**
-     * Retruns the nth product card 
+     * Returns the nth product card 
      * **(Note: The maximum number of products is 22)**
      * @param {Number} itemNo nth item in the list
      * @returns the nth product card
      */
     getProductCard (itemNo) {
-        return (`${itemNo}`)
+        return (`${itemNo}`)  //TO BE FIXED
     }
 
 
     /**
-     * Returns the name and price of the nth product  
+     * Returns the name, price and quantity of the nth product  
      * @param {Number} itemNo nth item in the list
-     * @returns a list containing the product name, price and quantity
+     * @returns a list of selectors for the product name, price and quantity
      */
     getProductCardData (itemNo) {
         return (
