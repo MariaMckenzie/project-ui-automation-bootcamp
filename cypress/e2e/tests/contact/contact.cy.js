@@ -1,10 +1,12 @@
 import { existingUser } from "../../data/user.data"
+import { msg1 } from "../../data/sender.data"
 import authenticationPage from "../../pages/authentication.page"
+import contactPage from "../../pages/contact.page"
 import homePage from "../../pages/home.page"
 
-describe('Search', () => {
+describe('Contact', () => {
     // variables
-    let key
+    let links
 
     beforeEach(() => {
         cy.clearCookies() // clear all cookies before starting the tests
@@ -21,110 +23,176 @@ describe('Search', () => {
         
         // wait for the page to load
         cy.wait(2000)
+
+        cy.get(homePage.contactButton).click()
+
+        // wait for the page to load
+        cy.wait(1000)
     })
 
 
-    /**
-     * Test Case ID: E2E_67
-     * Test Scenario: Check the functionality of the search
+     /**
+     * Test Case ID: E2E_73
+     * Test Scenario: Check the functionality and UI of the product contact page
      */
-    it("should verify that the user cannot search for a product using the product price, special characters or any number", () => {
-        // search for product using price
-        key = '23'
-        homePage.search(key)
-
-        // assert that there is no result
-        cy.get(homePage.firstProductCard)
-            .should("not.exist")
-    })
-    
-    /**
-     * Test Case ID: E2E_68
-     * Test Scenario: Check the functionality of the search
-     */
-    it("should verify that the search results will be empty if the product does not exist", () => {
-        // search for product that does not exist
-        key = 'banana'
-        homePage.search(key)
-
-        // assert that there is no result
-        cy.get(homePage.firstProductCard)
-            .should("not.exist")
+     it("should verify that the Contact button is active", () => {
+        // assert that the home button is visible
+        cy.get(contactPage.contactButton)            
+            .should("be.visible")
+            .and("contain.text", "Contact")
+            .and("have.css", "background-color", "rgb(49, 151, 149)") // button background colour
+            .and("have.css", "color", "rgb(255, 255, 255)") // text colour
     })
 
     
     /**
-     * Test Case ID: E2E_69
-     * Test Scenario: Check the functionality of the search
+     * Test Case ID: E2E_74
+     * Test Scenario: Check the functionality and UI of the product contact page
      */
-    it("should verify that the user cannot inject code into the search bar", () => {
-        // search for product using price
-        key = "alert('Hello there')"
-        homePage.search(key)
+    it("should verify that the navigation bar is visible", () => {
+        // assert that the nav bar is visible
+        cy.get(contactPage.navBar)
+            .should("be.visible")
 
-        // assert that there is no alert
-        let spy = cy.spy(window, 'alert');
-        expect(spy).to.not.be.called;
+        // assert that the buttons in the nav bar are visible - (home, about, contact, cart, sign out)
+        cy.get(contactPage.homeButton)
+            .should("be.visible")
+            .and("contain.text", "Home")
+        cy.get(contactPage.contactButton)
+            .should("be.visible")
+            .and("contain.text", "Contact")
+        cy.get(contactPage.cartButton)
+            .should("be.visible")
+            .and("contain.text", "0.00")
+        cy.get(contactPage.logoutButton)
+            .should("be.visible")
+            .and("contain.text", "Sign Out")
     })
-    
-    /**
-     * Test Case ID: E2E_70
-     * Test Scenario: Check the functionality of the search
-     */
-    it("should verify that the user can leave the search blank to see all products", () => {
-        // leave serach bar blank
-        cy.get(homePage.resetButton).click()
 
-        // assert that all products are displayed
-        cy.get(homePage.getProductCard(1)) // first product in inventory
-            .should("exist")
-            .and("be.visible")
+    /**
+     * Test Case ID: E2E_75
+     * Test Scenario: Check the functionality and UI of the product contact page
+     */
+    it("should verify that the store’s name and logo are visible at the top of the page", () => {        
+        // assert that the nav bar is visible
+        cy.get(contactPage.navBar)
+            .should("be.visible")
         
-        cy.get(homePage.getProductCard(5))
-            .should("exist")
-            .and("be.visible")
-        
-        cy.get(homePage.getProductCard(13))
-            .should("exist")
-            .and("be.visible")
-        
-        cy.get(homePage.getProductCard(22)) // last product in the inventory
-            .should("exist")
-            .and("be.visible") 
+        // assert that the logo and store name are visible
+        cy.get(contactPage.storeName)
+            .should("be.visible")
+            .and("contain", "Automation Camp Store")
+        cy.get(contactPage.storeImage)
+            .should("be.visible")
+            .and("have.attr", "src", "/favicon.ico")
     })
 
     /**
-     * Test Case ID: E2E_71
-     * Test Scenario: Check the functionality of the search
+     * Test Case ID: E2E_76
+     * Test Scenario: Check the functionality and UI of the product contact page
      */
-    it("should verify that the user can search for an existing product", () => {
-        // search for product using price
-        key = "mousepad"
-        homePage.search(key)
+    it("should verify that the user can sign out successfully", () => {
+        // assert that the sign out button is visible
+        cy.get(homePage.logoutButton)
+            .should("be.visible")
+            .and("contain.text", "Sign Out")
 
-        // assert that there is at least one result from the search
-        cy.get(homePage.getProductCard(1)) // first product in inventory
-            .should("exist")
-            .and("be.visible")
+        // logout
+        cy.get(homePage.logoutButton).click()
+
+        // assert that the user is signed out
+        cy.url()
+            .should("eq", "https://ui-automation-camp.vercel.app/")
     })
 
+    /**
+     * Test Case ID: E2E_77
+     * Test Scenario: Check the functionality and UI of the product contact page
+     */
+    it("should verify that the user cannot send a message unless all the required fields are filled", () => {        
+        // attempt to send message without filling any input fields
+        cy.get(contactPage.submitButton).click()
+        
+        // assert that the errors are visible
+        cy.get(contactPage.firstNameInputError)
+            .should("be.visible")
+            .and("contain", "Field is required")
+            .and("have.css", "color", "rgb(229, 62, 62)") // text colour
+        cy.get(contactPage.firstNameInput)
+            .should("have.css", "color", "rgb(26, 32, 44)") // check input field border colour
+
+        cy.get(contactPage.lastNameInputError)
+            .should("be.visible")
+            .and("contain", "Field is required")
+            .and("have.css", "color", "rgb(229, 62, 62)") // text colour
+        cy.get(contactPage.lastNameInput)
+            .should("have.css", "color", "rgb(26, 32, 44)") // check input field border colour
+
+        cy.get(contactPage.emailInputError)
+            .should("be.visible")
+            .and("contain", "Field is required")
+            .and("have.css", "color", "rgb(229, 62, 62)") // text colour
+        cy.get(contactPage.emailInput)
+            .should("have.css", "color", "rgb(26, 32, 44)") // check input field border colour
+    })
     
     /**
-     * Test Case ID: E2E_72
-     * Test Scenario: Check the functionality of the search
+     * Test Case ID: E2E_78
+     * Test Scenario: Check the functionality and UI of the product contact page
      */
-    it("should verify that the user can search for a product within a category", () => {
-        // select category
-        homePage.filterProducts("pant")
-
-        // search for product using price
-        key = "cargo"
-        homePage.search(key)
-
-        // assert that there is at least one result from the search
-        cy.get(homePage.getProductCard(1)) // first product in inventory
-            .should("exist")
-            .and("be.visible")
+    it("should verify that the user can send a message", () => {        
+        // attempt to send message with valid data
+        contactPage.completeContactForm(msg1.firstname, msg1.lastname, msg1.email, msg1.subject, msg1.message)
+        
+        // assert that the message was sent 
+        cy.get('#toast-1')
+            .should('exist') // check for toast to pop up
+        cy.get('#toast-1-description')
+            .should('contain','Your message has been sent' ) // check for toast to pop up
+        
+    })
+    
+    /**
+     * Test Case ID: E2E_79
+     * Test Scenario: Check the functionality and UI of the product contact page
+     */
+    it("should verify that the user cannot the message unless the email is valid", () => {        
+        // attempt to send message with valid data
+        cy.get(contactPage.emailInput).type("email")
+        cy.get(contactPage.submitButton).click()
+        
+        // assert that the error is visible
+        cy.get(contactPage.emailInputError)
+            .should("be.visible")
+            .and("contain", "Email is invalid")
+    })
+    
+    /**
+     * Test Case ID: E2E_80
+     * Test Scenario: Check the functionality and UI of the product contact page
+     */
+    it("should verify that the links are visible and link to their corresponding account", () => { 
+        links = ["mailto:info@qualityworkscg.com", 
+                    "https://www.linkedin.com/company/qualityworks-consulting-group-llc",
+                    "https://twitter.com/qualityworkscg" 
+                ]
+        // assert that the button is linked to email 
+        cy.get(contactPage.linkToEmail)
+            .should("be.visible")
+            .and("have.attr", "href", links[0])
+            .and("contain.text", "info@qualityworkscg.com")
+        
+        // assert that the button is linked to a linkedin account
+        cy.get(contactPage.linkToLinkedIn)
+            .should("be.visible")
+            .and("have.attr", "href", links[1])
+            .and("contain.text", "Linkedin")
+        
+        // assert that the button is linked to a twitter account
+        cy.get(contactPage.linkToTwitter)
+            .should("be.visible")
+            .and("have.attr", "href", links[2])
+            .and("contain.text", "Twitter")
     })
 
 })
