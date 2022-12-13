@@ -111,7 +111,7 @@ describe('Sort-and-Filter', () => {
      * Test Scenario: Check the functionality of the sort-and-filter
      */
     it("should verify that the user can sort the products by price in ascending order", () => {
-        // sort products by name (a-z)
+        // sort products by price (low - high)
         homePage.sortProducts('loHi')
         productsList.sort(function(a, b){ 
             if (a[2] === b[2]) {
@@ -139,7 +139,7 @@ describe('Sort-and-Filter', () => {
      * Test Scenario: Check the functionality of the sort-and-filter
      */
     it("should verify that the user can sort the products by price in descending order", () => {
-        // sort products by name (a-z)
+        // sort products by price (high - low)
         homePage.sortProducts('hiLo')
         productsList.sort(function(a, b){ 
             if (a[2] === b[2]) {
@@ -166,7 +166,7 @@ describe('Sort-and-Filter', () => {
      * Test Scenario: Check the functionality of the sort-and-filter
      */
     it("should verify that the user can sort the search results on the ‘product’ page", () => {
-        // search for word
+        // search for product
         key = "shirt"
         homePage.search(key)
         
@@ -189,14 +189,14 @@ describe('Sort-and-Filter', () => {
      * Test Case ID: E2E_60
      * Test Scenario: Check the functionality of the sort-and-filter
      */
-    it.only("should verify that the user can filter products by category", () => {
+    it("should verify that the user can filter products by category", () => {
         // filter products by category
         category = "hat"
-        lst = productsList.filter(function(x) {return x[0].includes(category)})
+        lst = productsList.filter(function(x) {return x[1].includes(category)})
 
         homePage.filterProducts(category)
 
-        // assert that the products are sorted 
+        // assert that the products are filtered 
         cy.get(homePage.getProductCardData(1)[0])
             .should("have.text", lst[0][0])
         cy.get(homePage.getProductCardData(2)[0])
@@ -205,11 +205,11 @@ describe('Sort-and-Filter', () => {
             
         // filter products by category
         category = "pant"
-        lst = productsList.filter(function(x) {return x[0].includes(category)})
+        lst = productsList.filter(function(x) {return x[1].includes(category)})
 
         homePage.filterProducts(category)
 
-        // assert that the products are sorted 
+        // assert that the products are filtered 
         cy.get(homePage.getProductCardData(1)[0])
             .should("have.text", lst[0][0])
         cy.get(homePage.getProductCardData(2)[0])
@@ -220,9 +220,45 @@ describe('Sort-and-Filter', () => {
         
         // filter products by category
         category = "laptop"
-        lst = productsList.filter(function(x) {return x[0].includes(category)})
+        lst = productsList.filter(function(x) {return x[1].includes(category)})
 
         homePage.filterProducts(category)
+
+        // assert that the products are filtered 
+        cy.get(homePage.getProductCardData(1)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(2)[0])
+            .should("have.text", lst[1][0])
+        cy.get(homePage.getProductCardData(3)[0])
+            .should("have.text", lst[2][0])
+    })
+    
+    /**
+     * Test Case ID: E2E_61
+     * Test Scenario: Check the functionality of the sort-and-filter
+     */
+    it("should verify that the user can sort the filtered products", () => {
+         // filter products by category
+        category = "pant"
+        lst = productsList.filter(function(x) {return x[1].includes(category)})
+
+        homePage.filterProducts(category)
+
+        // assert that the products are filtered 
+        cy.get(homePage.getProductCardData(1)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(2)[0])
+            .should("have.text", lst[1][0])
+        cy.get(homePage.getProductCardData(3)[0])
+            .should("have.text", lst[2][0])
+
+        // sort the filtered products by price (low - high)
+        homePage.sortProducts('loHi')
+        lst = lst.sort(function(a, b){ 
+            if (a[2] === b[2]) {
+                return a[0].localeCompare(b[0])
+            } return a[2] - b[2]             
+        }) // sort products list
 
         // assert that the products are sorted 
         cy.get(homePage.getProductCardData(1)[0])
@@ -234,74 +270,183 @@ describe('Sort-and-Filter', () => {
     })
     
     /**
-     * Test Case ID: E2E_5
+     * Test Case ID: E2E_62
      * Test Scenario: Check the functionality of the sort-and-filter
      */
-    it("should verify that the sort and filter selections are visible", () => {
+    it("should verify that the user can filter the search results on the ‘product’ page", () => {
+        // search for product
+        key = "c"
+        category = "couch"
+        homePage.search(key)
         
-    })
-    
-    /**
-     * Test Case ID: E2E_5
-     * Test Scenario: Check the functionality of the sort-and-filter
-     */
-    it("should verify that the sort and filter selections are visible", () => {
-        
-    })
-    
-    /**
-     * Test Case ID: E2E_5
-     * Test Scenario: Check the functionality of the sort-and-filter
-     */
-    it("should verify that the sort and filter selections are visible", () => {
-        
-    })
-    
-    /**
-     * Test Case ID: E2E_5
-     * Test Scenario: Check the functionality of the sort-and-filter
-     */
-    it("should verify that the sort and filter selections are visible", () => {
-        
-    })
-    
-    /**
-     * Test Case ID: E2E_5
-     * Test Scenario: Check the functionality of the sort-and-filter
-     */
-    it("should verify that the sort and filter selections are visible", () => {
-        
-    })
-    
-    /**
-     * Test Case ID: E2E_5
-     * Test Scenario: Check the functionality of the sort-and-filter
-     */
-    it("should verify that the sort and filter selections are visible", () => {
-        
-    })
-    
-    /**
-     * Test Case ID: E2E_5
-     * Test Scenario: Check the functionality of the sort-and-filter
-     */
-    it("should verify that the sort and filter selections are visible", () => {
-        
-    })
-    
-    /**
-     * Test Case ID: E2E_5
-     * Test Scenario: Check the functionality of the sort-and-filter
-     */
-    it("should verify that the sort and filter selections are visible", () => {
-        
-    })
+        // filter search results by category
+        lst = productsList.filter(function(x) {return x[0].includes(key) & x[1].includes(category)})
+        homePage.filterProducts(category)
 
+        // assert that the products are filtered 
+        cy.get(homePage.getProductCardData(1)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(2)[0])
+            .should("have.text", lst[1][0])
+        cy.get(homePage.getProductCardData(3)[0])
+            .should("have.text", lst[2][0])
+    })
+    
+    /**
+     * Test Case ID: E2E_63
+     * Test Scenario: Check the functionality of the sort-and-filter
+     */
+    it("should verify that the user can reset the selected sort and filter options", () => {
+         // filter products by category
+         category = "pant"
+         lst = productsList.filter(function(x) {return x[1].includes(category)})
+ 
+         homePage.filterProducts(category)
+ 
+         // assert that the products are filtered 
+         cy.get(homePage.getProductCardData(1)[0])
+             .should("have.text", lst[0][0])
+         cy.get(homePage.getProductCardData(2)[0])
+             .should("have.text", lst[1][0])
+         cy.get(homePage.getProductCardData(3)[0])
+             .should("have.text", lst[2][0])
+ 
+         // sort the filtered products by price (low - high)
+         homePage.sortProducts('loHi')
+         lst = lst.sort(function(a, b){ 
+             if (a[2] === b[2]) {
+                 return a[0].localeCompare(b[0])
+             } return a[2] - b[2]             
+         }) // sort products list
+ 
+         // assert that the products are sorted 
+         cy.get(homePage.getProductCardData(1)[0])
+             .should("have.text", lst[0][0])
+         cy.get(homePage.getProductCardData(2)[0])
+             .should("have.text", lst[1][0])
+         cy.get(homePage.getProductCardData(3)[0])
+             .should("have.text", lst[2][0])
 
-// Verifies that the user can sort the filtered products
-// Verifies that the user can filter the search results on the ‘product’ page
-// Verifies that the user can reset the selected sort and filter options
-// Verifies that the user cannot sort an empty list of products
-// Verifies that the user cannot filter an empty list of products
+        // select the option to reset
+        cy.get(homePage.resetButton)
+         .should("be.visible")
+         .and("contain", "Reset")
+        cy.get(homePage.resetButton).click()
+    })
+    
+    /**
+     * Test Case ID: E2E_64
+     * Test Scenario: Check the functionality of the sort-and-filter
+     */
+    it("should verify that the user cannot sort an empty list of products", () => {
+        // search for product that does not exist
+        key = "apple"
+        homePage.search(key)
+
+        // assert that the products list is empty, thus no products are displayed
+        cy.get(homePage.firstProductCard)
+            .should("not.exist")
+        
+        // attempt to sort the empty list
+        homePage.sortProducts("az")
+
+        // assert that the products list is still empty, thus no products are displayed
+        cy.get(homePage.firstProductCard)
+            .should("not.exist")
+    })
+    
+    /**
+     * Test Case ID: E2E_65
+     * Test Scenario: Check the functionality of the sort-and-filter
+     */
+    it("should verify that the user cannot filter an empty list of products", () => {
+        // search for product that does not exist
+        key = "apple"
+        homePage.search(key)
+
+        // assert that the products list is empty, thus no products are displayed
+        cy.get(homePage.firstProductCard)
+            .should("not.exist")
+        
+        // attempt to sort the empty list
+        homePage.filterProducts("laptop")
+
+        // assert that the products list is still empty, thus no products are displayed
+        cy.get(homePage.firstProductCard)
+            .should("not.exist")
+    })
+    
+    /**
+     * Test Case ID: E2E_66
+     * Test Scenario: Check the functionality of the sort-and-filter
+     * Note: 
+     */
+    it.skip("should verify that all products can be filtered by category", () => {
+        // filter products whose category is not in the category dropdown selection
+        lst = productsList.filter(function(x) {return !(x[1].includes("shirt") || x[1].includes("pant") || x[1].includes("hat") || x[1].includes("shoes") || x[1].includes("couch") || x[1].includes("laptop")) })
+        
+        //console.log(lst) // to view these products
+
+        // assert that the items do not fall in any category from the dropdown selection
+        homePage.filterProducts("shirt")
+        cy.get(homePage.getProductCardData(1)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(2)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(3)[0])
+            .should("have.text", lst[0][0])
+
+        homePage.filterProducts("pant")
+        cy.get(homePage.getProductCardData(1)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(2)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(3)[0])
+            .should("have.text", lst[0][0])
+
+        homePage.filterProducts("shirt")
+        cy.get(homePage.getProductCardData(1)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(2)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(3)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(4)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(5)[0])
+            .should("have.text", lst[0][0])
+
+        homePage.filterProducts("hat")
+        cy.get(homePage.getProductCardData(1)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(2)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(3)[0])
+            .should("have.text", lst[0][0])
+
+        homePage.filterProducts("shoes")
+        cy.get(homePage.getProductCardData(1)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(2)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(3)[0])
+            .should("have.text", lst[0][0])
+
+        homePage.filterProducts("couch")
+        cy.get(homePage.getProductCardData(1)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(2)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(3)[0])
+            .should("have.text", lst[0][0])
+
+        homePage.filterProducts("laptop")
+        cy.get(homePage.getProductCardData(1)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(2)[0])
+            .should("have.text", lst[0][0])
+        cy.get(homePage.getProductCardData(3)[0])
+            .should("have.text", lst[0][0])
+    })
 
 })
