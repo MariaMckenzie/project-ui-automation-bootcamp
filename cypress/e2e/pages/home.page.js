@@ -54,7 +54,7 @@ class Home {
 
 
     /**
-     * @returns the selector for the title of the products section of the page
+     * @returns the selector for the title of the page
      */
     get title () { return (".chakra-heading.css-1jhlc8u") }
 
