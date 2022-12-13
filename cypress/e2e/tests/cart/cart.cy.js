@@ -242,8 +242,7 @@ describe("Cart", () => {
         // assert that there is a back button
         cy.get(cartPage.backToHomeButton)
             .should("be.visible")
-        cy.get(cartPage.backToHomeButton)
-            .should("contain", "Continue shopping")
+            .and("contain", "Continue shopping")
         cartPage.closeCart()
 
         // wait for page to load
@@ -268,8 +267,7 @@ describe("Cart", () => {
         // assert that there is a checkout button
         cy.get(cartPage.checkoutButton)
             .should("be.visible")
-        cy.get(cartPage.checkoutButton)
-            .should("contain", "Checkout")
+            .and("contain", "Checkout")
 
         // assert that the user goes to checkout once the checkout button is clicked
         cy.get(cartPage.checkoutButton).click()
