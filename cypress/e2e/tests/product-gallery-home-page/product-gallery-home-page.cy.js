@@ -199,8 +199,7 @@ describe('Product Gallery (Home Page)', () => {
         // check that the quantity has changed and is not equal to 1 (default)
         cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`)
             .should("contain.value", product13.quantity)
-        cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`)
-            .should("not.contain", "1")
+            .and("not.contain", "1")
     })
 
     /**
@@ -219,8 +218,7 @@ describe('Product Gallery (Home Page)', () => {
         // check that the quantity input has now become blank
         cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`)
             .should("have.text", "")
-        cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`)
-            .should("not.contain", "1")
+            .and("not.contain", "1")
     })
 
 })
