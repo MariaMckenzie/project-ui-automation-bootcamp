@@ -9,7 +9,7 @@ module.exports = {
         password: "P@ssword1",
         errorMsg: "",
         name: "John Doe",
-        addr: ["1 Rosewood Avenue","Miami","Florida","United States","123456"],
+        addr: ["1 Rosewood Avenue","Kingston 4","Kingston","JM","123456"],
         badAddr: ["1 Rosewood Avenue","","Florida","","123456"],
         cardInfo: [4242424242424242,1224, 123]
     },
