@@ -158,8 +158,7 @@ describe('Sort-and-Filter', () => {
             .should("have.text", productsList[20][0])
         cy.get(homePage.getProductCardData(22)[0])
             .should("have.text", productsList[21][0])
-    })
-    
+    })    
     
     /**
      * Test Case ID: E2E_59
@@ -182,7 +181,6 @@ describe('Sort-and-Filter', () => {
             .should("have.text", lst[1][0])
         cy.get(homePage.getProductCardData(3)[0])
             .should("have.text", lst[2][0])
-
     })
     
     /**
