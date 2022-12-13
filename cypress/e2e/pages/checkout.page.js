@@ -38,13 +38,13 @@ class Checkout {
     /**
      * @returns the selector for the input field for country
      */
-    get countryInput () { return ("div[class='snipcart-form__field'] div[class='snipcart-textbox snipcart__font--bold snipcart__font--secondary snipcart-form__select'] input") }
+    get countryInput () { return ("select[name='country']") }
 
 
     /**
      * @returns the selector for the input field for state
      */
-    get stateInput () { return ("div[class='snipcart-form__field snipcart-form__cell--large'] div[class='snipcart-typeahead'] div[class='snipcart-textbox snipcart__font--bold snipcart__font--secondary snipcart-form__select'] input") }
+    get stateInput () { return ("input[name='province']") }
 
 
     /**
@@ -60,15 +60,53 @@ class Checkout {
 
 
     /**
-     * @returns the selector for the missing email error
+     * @returns the selector for the missing country error
      */
-    get emailError() { return ("div[data-for='email']") }
+    get countryError() { return ("div[data-for='country']") }
 
 
     /**
      * @returns the selector for the missing city error
      */
     get cityError() { return ("div[data-for='city']") }
+
+
+    /**
+     * @returns the selector for the cart summary
+     */
+    get cartSummary() { return (".snipcart-cart-summary__content") }
+
+
+    /**
+     * @returns the selector for the cart summary title
+     */
+    get cartSummaryTitle() { return (".snipcart-cart-summary__title") }
+
+
+    /**
+     * @returns the selector for the cart summary dropdown
+     */
+    get cartSummaryDropdown() { return (".snipcart-modal__header-summary-title.snipcart__font--large.snipcart__font--secondary.snipcart__font--bold") }
+
+
+    /**
+     * @returns the selector for the cart summary list
+     */
+    get cartSummaryList() { return (".snipcart-cart-summary-items-list") }
+
+
+    /**
+     * @returns the selector for the cart summary total
+     */
+    get cartSummaryTotal() { return (".snipcart-summary-fees__amount") }
+    
+    
+    /**
+     * @returns the selector for the cart summary total
+     */
+    get cartTotal() { return (".snipcart-modal__header-summary-title > span") }
+
+
 
 
     // PAYMENTS 
@@ -112,7 +150,13 @@ class Checkout {
     /**
      * @returns the selector for the button to edit billing information
      */
-    get editBillingButton() { return ("div[class='snipcart-billing-completed__header snipcart__box--header'] button[type='button']") }
+    get editBillingButton() { return (".snipcart-button-link") }
+
+
+    /**
+     * @returns the selector for the billing information details
+     */
+    get billingInfo () { return (":nth-child(1) > :nth-child(2) > .snipcart-billing-completed__information") }
 
 
     /**
@@ -125,6 +169,12 @@ class Checkout {
      * @returns the selector for the customer's billing information
      */
     get customerInformation () { return (".snipcart-checkout-step__col:nth-child(1) > div > span")}
+
+
+    /**
+     * @returns the selector for the button that takes the user back to home
+     */
+    get backToHomeButton () { return (".snipcart-cart-header__close-button.snipcart-modal__close") }
 
 
 
@@ -144,11 +194,11 @@ class Checkout {
             cy.get(this.emailInput).type(email)
             cy.get(this.address1Input).type(addr[0])
             cy.get(this.cityInput).type(addr[1])
+            cy.get(this.countryInput).select(addr[3])
             cy.get(this.stateInput).type(addr[2])
-            cy.get(this.countryInput).type(addr[3])
             cy.get(this.postalCodeInput).type(addr[4])
     
-            cy.get(this.continueButton).click()
+            cy.get(this.continueButton).click({force: true})
         }
     }
     
@@ -160,10 +210,78 @@ class Checkout {
      * @param {Number} cvv card cvv
      */
     addCardInformation (cardNumber, expiryDate, cvv) {
-            cy.get(this.nameInput).type(`${cardNumber}`)
-            cy.get(this.emailInput).type(`${expiryDate}`)
-            cy.get(this.address1Input).type(`${cvv}`)
-            cy.get(this.placeOrderButton).click()
+        if (cardNumber === "" || isNaN(cardNumber)) {
+            cy.get(".snipcart-payment-card-form > iframe")
+                .its("0.contentDocument.body")
+                .then(cy.wrap)
+                .find(this.cardNumberInput).clear()
+        } else {
+            cy.get(".snipcart-payment-card-form > iframe")
+                .its("0.contentDocument.body")
+                .then(cy.wrap)
+                .find(this.cardNumberInput).type(cardNumber)
+        }
+
+        if (expiryDate === "" || isNaN(expiryDate)) {
+            cy.get(".snipcart-payment-card-form > iframe")
+                .its("0.contentDocument.body")
+                .then(cy.wrap)
+                .find(this.expiryDateInput).clear()
+        } else {
+            // // check for valid card date
+            // let today, someday, isValid;
+            // let expMonth =Number(`${expiryDate}`.substring(0,2));
+            // let expYear = Number(`20${expiryDate}`.substring(2,4));
+
+            // today = new Date();
+            // someday = new Date();
+            // someday.setFullYear(expYear, expMonth, 1);
+
+            // if (someday < today) {
+            //     isValid = false;
+            // } else {
+            //     isValid = true;
+            // }
+
+            // if (isValid === true) {
+            //     cy.get(this.expiryDateInput).type(expiryDate)
+            // }
+            // else {
+            //     cy.get(this.expiryDateInput).clear()
+            // }
+
+            cy.get(".snipcart-payment-card-form > iframe")
+                .its("0.contentDocument.body")
+                .then(cy.wrap)
+                .find(this.expiryDateInput).type(expiryDate)
+        }
+
+        if (cvv === "" || isNaN(cvv)) {
+            cy.get(".snipcart-payment-card-form > iframe")
+                .its("0.contentDocument.body")
+                .then(cy.wrap)
+                .find(this.cvvInput).type(cvv).clear()
+        } else {
+            cy.get(".snipcart-payment-card-form > iframe")
+                .its("0.contentDocument.body")
+                .then(cy.wrap)
+                .find(this.cvvInput).type(cvv)
+        }
+
+        cy.get(this.placeOrderButton).click()
+    }
+
+
+/**
+ * Returns a list of selectors with the name, quantity and price for products in the cart summary
+ * @param {Number} itemNo 
+ * @returns a list of selectors containing the product name, quantity and price
+ */
+    getCartSummaryInformation (itemNo) {
+        return ([`${this.cartSummaryList} li:nth-child(${itemNo}) .snipcart-cart-summary-item__name`,
+            `${this.cartSummaryList} li:nth-child(${itemNo}) > .snipcart-cart-summary-item__quantity`,
+            `${this.cartSummaryList} li:nth-child(${itemNo}) > .snipcart-cart-summary-item__price`
+        ])
     }
 
 }
