@@ -1,12 +1,12 @@
 module.exports = {
     newUser: {
         email: "johndoe5@mail.com",
-        password: "P@ssword1",
-        errorMsg: ""
+        password: "P@ssword1"
     },
     existingUser: {
         email: "johndoe1@mail.com",
         password: "P@ssword1",
+        errorMsg: "We're sorry, something went wrong"
     },
     nonexistingUser: {
         email: "jd14@mail.com",
