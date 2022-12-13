@@ -149,7 +149,6 @@ class Home {
      * **(Note: The maximum number of products is 22)**
      * @param {Number} itemNo nth item in the list
      * @param {Number} quantity number of products required
-     * @returns a list containing the product name and price
      */
     addToCart (itemNo, quantity) {
         if (quantity !== "" ||  isNaN(quantity) == true) {
@@ -169,7 +168,6 @@ class Home {
      * **(Note: The maximum number of products is 22)**
      * @param {Number} itemNo nth item in the list
      * @param {Number} quantity number of products required
-     * @returns a list containing the product name and price
      */
     modifyQuantity (itemNo, quantity) {
         if (quantity !== "" ||  isNaN(quantity) == true) {
