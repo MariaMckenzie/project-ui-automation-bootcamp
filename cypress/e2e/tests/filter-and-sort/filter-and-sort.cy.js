@@ -379,7 +379,7 @@ describe('Sort-and-Filter', () => {
     /**
      * Test Case ID: E2E_66
      * Test Scenario: Check the functionality of the sort-and-filter
-     * Note: 
+     * Note: Test does not work, there is at least one item that does not fall into any of the categories in the dropdown
      */
     it.skip("should verify that all products can be filtered by category", () => {
         // filter products whose category is not in the category dropdown selection
