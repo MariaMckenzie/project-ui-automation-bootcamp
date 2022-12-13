@@ -24,31 +24,37 @@ describe('Authentication', () => {
         authenticationPage.loginOrSignup(missingData.email, missingData.password)
 
         // assert that the error messages are displayed
-       cy.get(authenticationPage.emailError).should("be.visible")
-       cy.get(authenticationPage.emailError).should("contain", missingData.errorMsg[0])
-       cy.get(authenticationPage.passwordError).should("be.visible")
-       cy.get(authenticationPage.passwordError).should("contain", missingData.errorMsg[1])
+        cy.get(authenticationPage.emailError)
+            .should("be.visible")
+            .and("contain", missingData.errorMsg[0])
+        cy.get(authenticationPage.passwordError)
+            .should("be.visible")
+            .and("contain", missingData.errorMsg[1])
 
        
         // attempt to sign up when the email field is empty
         authenticationPage.loginOrSignup(missingEmail.email, missingEmail.password)
 
         // assert that the error message is displayed
-       cy.get(authenticationPage.emailError).should("be.visible")
-       cy.get(authenticationPage.emailError).should("contain", missingEmail.errorMsg)
-       cy.get(authenticationPage.passwordError).should("not.exist")
+        cy.get(authenticationPage.emailError)
+            .should("be.visible")
+            .and("contain", missingEmail.errorMsg)
+        cy.get( authenticationPage.passwordError)
+            .should("not.exist")
 
 
-       // clear input
-       cy.get(authenticationPage.passwordInput).clear()
-       
+        // clear input
+        cy.get(authenticationPage.passwordInput).clear()
+            
         // attempt to sign up when the password field is empty
         authenticationPage.loginOrSignup(missingPassword.email, missingPassword.password)
 
         // assert that the error message is displayed
-       cy.get(authenticationPage.emailError).should("not.exist")
-       cy.get(authenticationPage.passwordError).should("be.visible")
-       cy.get(authenticationPage.passwordError).should("contain", missingPassword.errorMsg)
+        cy.get(authenticationPage.emailError)
+            .should("not.exist")
+        cy.get(authenticationPage.passwordError)
+            .should("be.visible")
+            .and("contain", missingPassword.errorMsg)
     })
 
     /**
@@ -66,10 +72,12 @@ describe('Authentication', () => {
         authenticationPage.loginOrSignup(invalidData.email, invalidData.password)
 
         // assert that the error message is displayed
-        cy.get(authenticationPage.emailError).should("be.visible")
-        cy.get(authenticationPage.emailError).should("contain", invalidData.errorMsg[0])
-        cy.get(authenticationPage.passwordError).should("be.visible")
-        cy.get(authenticationPage.passwordError).should("contain", invalidData.errorMsg[1])
+        cy.get(authenticationPage.emailError)
+                .should("be.visible")
+                .and("contain", invalidData.errorMsg[0])
+        cy.get(authenticationPage.passwordError)
+                .should("be.visible")
+                .and("contain", invalidData.errorMsg[1])
     })
 
     /**
@@ -87,8 +95,9 @@ describe('Authentication', () => {
         authenticationPage.loginOrSignup(existingUser.email, existingUser.password)
 
         // assert that the error message is displayed
-        cy.get(authenticationPage.existingEmailError).should("be.visible")
-        cy.get(authenticationPage.existingEmailError).should("contain", existingUser.errorMsg)
+        cy.get(authenticationPage.existingEmailError)
+                .should("be.visible")
+                .and("contain", existingUser.errorMsg)
     })
     
     /**
@@ -106,13 +115,15 @@ describe('Authentication', () => {
         authenticationPage.loginOrSignup(newUser.email, newUser.password)
 
         // assert that sign up is successful
-        cy.url().should("contain", "https://ui-automation-camp.vercel.app/products")
-        cy.get(homePage.cartButton).should("be.visible") // user can see the cart
-        cy.get(homePage.contactButton).should("be.visible") // user can go to contact form
-        cy.get(homePage.logoutButton).should("be.visible") // user can log out
-
-        // logout
-        cy.get(homePage.logoutButton).click()
+        cy.url()
+            .should("contain", "https://ui-automation-camp.vercel.app/products")
+        cy.get(homePage.navBar)
+            .should("be.visible") // check that the nav bar is visible
+        cy.get(homePage.homeButton) 
+            .should("be.visible") // check that the home button is highlighted
+            .and("contain.text", "Home")
+            .and("have.css", "background-color", "rgb(49, 151, 149)") // button background colour
+            .and("have.css", "color", "rgb(255, 255, 255)") // text colour
     })
     
     /**
@@ -129,19 +140,23 @@ describe('Authentication', () => {
         authenticationPage.loginOrSignup(missingData.email, missingData.password)
 
         // assert that the error messages are displayed
-       cy.get(authenticationPage.emailError).should("be.visible")
-       cy.get(authenticationPage.emailError).should("contain", missingData.errorMsg[0])
-       cy.get(authenticationPage.passwordError).should("be.visible")
-       cy.get(authenticationPage.passwordError).should("contain", missingData.errorMsg[1])
+       cy.get(authenticationPage.emailError)
+            .should("be.visible")
+            .and("contain", missingData.errorMsg[0])
+       cy.get(authenticationPage.passwordError)
+            .should("be.visible")
+            .and("contain", missingData.errorMsg[1])
 
        
         // attempt to login when the email field is empty
         authenticationPage.loginOrSignup(missingEmail.email, missingEmail.password)
 
         // assert that the error message is displayed
-       cy.get(authenticationPage.emailError).should("be.visible")
-       cy.get(authenticationPage.emailError).should("contain", missingEmail.errorMsg)
-       cy.get(authenticationPage.passwordError).should("not.exist")
+       cy.get(authenticationPage.emailError)
+            .should("be.visible")
+            .and("contain", missingEmail.errorMsg)
+       cy.get(authenticationPage.passwordError)
+            .should("not.exist")
 
 
        // clear input
@@ -151,9 +166,11 @@ describe('Authentication', () => {
         authenticationPage.loginOrSignup(missingPassword.email, missingPassword.password)
 
         // assert that the error message is displayed
-       cy.get(authenticationPage.emailError).should("not.exist")
-       cy.get(authenticationPage.passwordError).should("be.visible")
-       cy.get(authenticationPage.passwordError).should("contain", missingPassword.errorMsg)
+       cy.get(authenticationPage.emailError)
+            .should("not.exist")
+       cy.get(authenticationPage.passwordError)
+            .should("be.visible")
+            .and("contain", missingPassword.errorMsg)
     })
     
     /**
@@ -170,9 +187,11 @@ describe('Authentication', () => {
         authenticationPage.loginOrSignup(invalidData.email, invalidData.password)
 
         // assert that the error message is displayed
-        cy.get(authenticationPage.emailError).should("be.visible")
-        cy.get(authenticationPage.emailError).should("contain", invalidData.errorMsg[0])
-        cy.get(authenticationPage.passwordError).should("not.exist")
+        cy.get(authenticationPage.emailError)
+                .should("be.visible")
+                .and("contain", invalidData.errorMsg[0])
+        cy.get(authenticationPage.passwordError)
+                .should("not.exist")
     })
     
     /**
@@ -189,15 +208,16 @@ describe('Authentication', () => {
         authenticationPage.loginOrSignup(nonexistingUser.email, nonexistingUser.password)
 
         // assert that the error message is displayed
-        cy.get(authenticationPage.invalidLoginError).should("be.visible")
-        cy.get(authenticationPage.invalidLoginError).should("contain", existingUser.errorMsg)
+        cy.get(authenticationPage.invalidLoginError)
+                .should("be.visible")
+                .and("contain", nonexistingUser.errorMsg)
     })
     
     /**
      * Test Case ID: E2E_8
      * Test Scenario: Check login functionality
      */ 
-     it.only('should verify that the user can login using an existing email address and the corresponding password', () => {
+     it('should verify that the user can login using an existing email address and the corresponding password', () => {
         cy.get(authenticationPage.signInOrRegisterButton).click()
 
         // wait for the page to load
@@ -207,13 +227,15 @@ describe('Authentication', () => {
         authenticationPage.loginOrSignup(existingUser.email, existingUser.password)
 
         // assert that sign up is successful
-        cy.url().should("contain", "https://ui-automation-camp.vercel.app/products")
-        cy.get(homePage.cartButton).should("be.visible") // user can see the cart
-        cy.get(homePage.contactButton).should("be.visible") // user can go to contact form
-        cy.get(homePage.logoutButton).should("be.visible") // user can log out
-
-        // logout
-        cy.get(homePage.logoutButton).click()
+        cy.url()
+            .should("contain", "https://ui-automation-camp.vercel.app/products")
+        cy.get(homePage.navBar)
+            .should("be.visible") // check that the nav bar is visible
+        cy.get(homePage.homeButton) 
+            .should("be.visible") // check that the home button is highlighted
+            .and("contain.text", "Home")
+            .and("have.css", "background-color", "rgb(49, 151, 149)") // button background colour
+            .and("have.css", "color", "rgb(255, 255, 255)") // text colour
     })
     
 })
