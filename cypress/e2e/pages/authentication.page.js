@@ -73,13 +73,16 @@ class Authentication {
      * @param {String} password
      */
     loginOrSignup (username, password) { 
+        cy.get(this.emailInput).clear( { force:true } )
+        cy.get(this.passwordInput).clear( { force:true } )
+
         if (username === '' & password === '') {
             cy.get(this.submitButton).click()
-        } else if (password === '') {
-            cy.get(this.emailInput).type(username)
+        } else if (password === '' & username !== '') {
+            cy.get(this.emailInput).type(username, { force:true } )
             cy.get(this.submitButton).click()
-        } else if (username === '') {
-            cy.get(this.passwordInput).type(password)
+        } else if (username === '' & password !== '') {
+            cy.get(this.passwordInput).type(password, { force:true } )
             cy.get(this.submitButton).click()
         } else {
             cy.get(this.emailInput).type(username)
