@@ -106,7 +106,6 @@ class Details {
     /**
      * Add product to cart
      * @param {Number} quantity number of products required
-     * @returns a list containing the product name and price
      */
     addToCart (quantity) {
         cy.get(this.productQuantity).clear()
