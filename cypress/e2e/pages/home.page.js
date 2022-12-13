@@ -101,6 +101,19 @@ class Home {
     get searchBar () { return ("#search") }
 
 
+    /**
+     * @returns the selector for the sort selection
+     */
+    get sortSelection () { return ("#sort") }
+
+
+    /**
+     * @returns the selector for the category selection
+     */
+    get categorySelection () { return ("#category") }
+
+
+
     // METHODS
 
     /**
@@ -190,6 +203,43 @@ class Home {
     search (key) {
         cy.get(this.searchBar).clear()
         cy.get(this.searchBar).type(key)
+    }
+
+    /**
+     * Sorts the products by the specified options
+     * @param {String} option the sort selection option
+     */
+    sortProducts (option) {
+        if (option === "az") {
+            cy.get(this.sortSelection).select("aToZ")
+        } else if (option === "za") {
+            cy.get(this.sortSelection).select("zToA")
+        } else if (option === "loHi") {
+            cy.get(this.sortSelection).select("lowToHigh")
+        } else if (option === "hiLo") {
+            cy.get(this.sortSelection).select("highToLow")
+        }
+    }
+
+
+    /**
+     * Filters the products by a specified category
+     * @param {String} category the filter category
+     */
+    filterProducts (category) {
+        if (category === "shirt") {
+            cy.get(this.categorySelection).select("Shirts")
+        } else if (category === "pant") {
+            cy.get(this.categorySelection).select("Pants")
+        } else if (category === "hat") {
+            cy.get(this.categorySelection).select("Hats")
+        } else if (category === "shoes") {
+            cy.get(this.categorySelection).select("Shoes")
+        } else if (category === "couch") {
+            cy.get(this.categorySelection).select("Couch/Sofa")
+        } else if (category === "laptop") {
+            cy.get(this.categorySelection).select("Laptops")
+        }
     }
 
 }
