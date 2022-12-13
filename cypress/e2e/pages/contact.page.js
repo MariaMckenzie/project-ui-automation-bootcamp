@@ -54,198 +54,102 @@ class Contact {
 
 
     /**
-     * @returns the selector for the title of the products section of the page
+     * @returns the selector for the title of the page
      */
-    get title () { return (".chakra-heading.css-1jhlc8u") }
+    get title () { return ("#__next > div:nth-child(2) > div > div > div.css-103gdes > h2") }
 
 
     /**
-     * @returns the selector for the first product card
+     * @returns the selector for the link to email
      */
-    get firstProductCard () { return ("#product-0") }
+    get linkToEmail () { return (".chakra-stack.css-r2h33i > a:nth-child(1)") }
 
 
     /**
-     * @returns the selector for the product quantity input field
+     * @returns the selector for the link to linkedin
      */
-    get productQuantity () { return ("input") }
+    get linkToLinkedIn () { return (".chakra-stack.css-r2h33i > a:nth-child(3)") }
 
 
     /**
-     * @returns the selector for the product name
+     * @returns the selector for the link to twitter
      */
-    get productName () { return (".css-1oeb4ru") }
+    get linkToTwitter () { return (".chakra-stack.css-r2h33i > a:nth-child(5)") }
 
 
     /**
-     * @returns the selector for the product image
+     * @returns the selector for the firstname input field
      */
-    get productImage () { return (".css-5ge9zd > .chakra-aspect-ratio") }
+    get firstNameInput () { return ("#firstName") }
 
 
     /**
-     * @returns the selector for the product price
+     * @returns the selector for the firstname input field error
      */
-    get productPrice () { return (".css-0") }
+    get firstNameInputError () { return ("body > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3)") }
+    
+
+    /**
+     * @returns the selector for the lastname input field
+     */
+    get lastNameInput () { return ("#lastName") }
 
 
     /**
-     * @returns the selector for the add-to-cart button
+     * @returns the selector for the lastname input field error
      */
-    get addToCartButton () { return ("#add-to-cart") }
+    get lastNameInputError () { return ("body > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3)") }
 
 
     /**
-     * @returns the selector for the searchbar
+     * @returns the selector for the email input field
      */
-    get searchBar () { return ("#search") }
+    get emailInput () { return ("#email") }
 
 
     /**
-     * @returns the selector for the sort selection
+     * @returns the selector for the email input field error
      */
-    get sortSelection () { return ("#sort") }
+    get emailInputError () { return ("body > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(3)") }
 
 
     /**
-     * @returns the selector for the category selection
+     * @returns the selector for the subject input field
      */
-    get categorySelection () { return ("#category") }
+    get subjectInput () { return ("#subject") }
 
 
     /**
-     * @returns the selector for the reset button
+     * @returns the selector for the message input field
      */
-    get resetButton () { return ("#reset") }
+    get messageInput () { return ("#message") }
+
+
+    /**
+     * @returns the selector for the submit button to send the message
+     */
+    get submitButton () { return (".css-1pdqelo > .chakra-button") }
 
 
 
     // METHODS
 
     /**
-     * Retruns the nth product card 
-     * **(Note: The maximum number of products is 22)**
-     * @param {Number} itemNo nth item in the list
-     * @returns the nth product card
+     * Fills the contact form and attempt to submit
+     * @param {String} fn firstname
+     * @param {String} ln lastname
+     * @param {String} email email
+     * @param {String} sub subject
+     * @param {String} msg message
      */
-    getProductCard (itemNo) {
-        return (`#product-${itemNo-1}`)
-    }
+    completeContactForm (fn, ln, email, sub, msg) {
+        cy.get(this.firstNameInput).type(fn)
+        cy.get(this.lastNameInput).type(ln)
+        cy.get(this.emailInput).type(email)
+        cy.get(this.subjectInput).type(sub)
+        cy.get(this.messageInput).type(msg)
 
-
-    /**
-     * Go to the nth product details page
-     * **(Note: The maximum number of products is 22)**
-     * @param {Number} itemNo nth item in the list
-     */
-    goToProductDetailsPage (itemNo) {
-        cy.get(`#product-${itemNo-1} > ${this.productImage}`).click()
-    }
-
-
-    /**
-     * Adds the nth item to favourites
-     * @param {Number} itemNo nth item in the list
-     */
-    addToFavourites (itemNo) {
-        cy.get(`#product-${itemNo-1} > ${this.productImage}`).click()
-    }
-
-
-    /**
-     * Returns the name and price of the nth product 
-     * **(Note: The maximum number of products is 22)**
-     * @param {Number} itemNo nth item in the list
-     * @returns a list containing the product name and price
-     */
-    getProductCardData (itemNo) {
-        return ([`#product-${itemNo-1} ${this.productName}`, `#product-${itemNo-1} ${this.productPrice}`])
-    }
-    
-
-    /**
-     * Add nth product to cart
-     * **(Note: The maximum number of products is 22)**
-     * @param {Number} itemNo nth item in the list
-     * @param {Number} quantity number of products required
-     * @returns a list containing the product name and price
-     */
-    addToCart (itemNo, quantity) {
-        if (quantity !== "" ||  isNaN(quantity) == true) {
-            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
-            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
-            cy.get(`#product-${itemNo-1} ${this.addToCartButton}`).click()
-        }
-        else {
-            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
-            cy.get(`#product-${itemNo-1} ${this.addToCartButton}`).click()
-        }
-    }
-
-    
-    /**
-     * Modify the nth product to cart
-     * **(Note: The maximum number of products is 22)**
-     * @param {Number} itemNo nth item in the list
-     * @param {Number} quantity number of products required
-     * @returns a list containing the product name and price
-     */
-    modifyQuantity (itemNo, quantity) {
-        if (quantity !== "" ||  isNaN(quantity) == true) {
-            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
-            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
-        }
-        else {
-            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
-        }
-    }
-
-
-    /**
-     * Search for product
-     * @param {String} key keyword for search
-     * @returns a list containing the product name and price
-     */
-    search (key) {
-        cy.get(this.searchBar).clear()
-        cy.get(this.searchBar).type(key)
-    }
-
-    /**
-     * Sorts the products by the specified options
-     * @param {String} option the sort selection option
-     */
-    sortProducts (option) {
-        if (option === "az") {
-            cy.get(this.sortSelection).select("aToZ")
-        } else if (option === "za") {
-            cy.get(this.sortSelection).select("zToA")
-        } else if (option === "loHi") {
-            cy.get(this.sortSelection).select("lowToHigh")
-        } else if (option === "hiLo") {
-            cy.get(this.sortSelection).select("highToLow")
-        }
-    }
-
-
-    /**
-     * Filters the products by a specified category
-     * @param {String} category the filter category
-     */
-    filterProducts (category) {
-        if (category === "shirt") {
-            cy.get(this.categorySelection).select("Shirts")
-        } else if (category === "pant") {
-            cy.get(this.categorySelection).select("Pants")
-        } else if (category === "hat") {
-            cy.get(this.categorySelection).select("Hats")
-        } else if (category === "shoes") {
-            cy.get(this.categorySelection).select("Shoes")
-        } else if (category === "couch") {
-            cy.get(this.categorySelection).select("Couch/Sofa")
-        } else if (category === "laptop") {
-            cy.get(this.categorySelection).select("Laptops")
-        }
+        cy.get(this.submitButton).click()
     }
 
 }
