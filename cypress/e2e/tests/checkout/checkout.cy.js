@@ -116,7 +116,7 @@ describe("Checkout", () => {
      * Test Case ID: E2E_48
      * Test Scenario: Check the functionality and UI of the checkout page
      */
-    it("should verify that the user cannot continue to payment if all the required fields (email, city, country) are empty", () => {
+    it.only("should verify that the user cannot continue to payment if all the required fields (email, city, country) are empty", () => {
         // add an item to cart
         homePage.addToCart(20, product20.quantity)
 
@@ -142,9 +142,11 @@ describe("Checkout", () => {
         cy.get(checkoutPage.countryError)
             .should("be.visible") // error message
             .and("contain", "This field is required") 
+            .and("have.css", "color", "rgb(158, 34, 21)") // text colour
         cy.get(checkoutPage.cityError)
             .should("be.visible") // error message
             .and("contain", "This field is required")
+            .and("have.css", "color", "rgb(158, 34, 21)") // text colour
      })
 
     /**
