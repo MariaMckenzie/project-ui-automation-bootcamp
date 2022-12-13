@@ -113,6 +113,12 @@ class Home {
     get categorySelection () { return ("#category") }
 
 
+    /**
+     * @returns the selector for the reset button
+     */
+    get resetButton () { return ("#reset") }
+
+
 
     // METHODS
 
