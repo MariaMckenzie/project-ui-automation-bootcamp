@@ -21,9 +21,6 @@ describe('Product Gallery (Home Page)', () => {
 
         // attempt to login with valid user data
         authenticationPage.loginOrSignup(existingUser.email, existingUser.password)
-
-        // visit the product details page
-        cy.visit("https://ui-automation-camp.vercel.app/products/couch-1")
         
         // wait for the page to load
         cy.wait(2000)
