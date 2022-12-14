@@ -332,7 +332,7 @@ describe("Add-to-cart", () => {
         // assert that product is not in the cart
         cy.get(cartPage.firstProductCard)
             .should("not.exist")
-        cy.get(cartPage.emptyCartError)
+        cy.get(cartPage.cartError)
             .should("be.visible")
     })
 
@@ -352,7 +352,7 @@ describe("Add-to-cart", () => {
         // assert that product is not in the cart
         cy.get(cartPage.firstProductCard)
             .should("not.exist")
-        cy.get(cartPage.emptyCartError)
+        cy.get(cartPage.cartError)
             .should("be.visible")
 
         // close cart
