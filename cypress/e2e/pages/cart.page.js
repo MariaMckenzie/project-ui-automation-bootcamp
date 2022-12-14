@@ -52,6 +52,12 @@ class Cart {
      */
     get cartTotal () { return (".snipcart-summary-fees__amount") }
 
+    
+    /**
+     * @returns the selector for the cart error
+     */
+    get cartError () { return (".snipcart-empty-cart__title.snipcart__font--secondary.snipcart__font--xlarge.snipcart__font--bold") }
+
 
 
     // METHODS
