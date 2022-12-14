@@ -137,7 +137,6 @@ class Home {
      * Returns the name and price of the nth product 
      * **(Note: The maximum number of products is 22)**
      * @param {Number} itemNo nth item in the list
-     * @returns a list containing the product name and price
      */
     getProductCardData (itemNo) {
         return ([`#product-${itemNo-1} ${this.productName}`, `#product-${itemNo-1} ${this.productPrice}`])

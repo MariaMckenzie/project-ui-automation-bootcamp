@@ -52,6 +52,12 @@ class Cart {
      */
     get cartTotal () { return (".snipcart-summary-fees__amount") }
 
+    
+    /**
+     * @returns the selector for the cart error
+     */
+    get cartError () { return (".snipcart-empty-cart__title.snipcart__font--secondary.snipcart__font--xlarge.snipcart__font--bold") }
+
 
     /**
      * @returns the selector for the button that takes the user to checkout
@@ -98,6 +104,19 @@ class Cart {
                 `${this.productsList} > li:nth-child(${itemNo}) > div > div ${this.productPrice}`,
                 `${this.productsList} > li:nth-child(${itemNo}) > div > div ${this.productQuantity}`
             ])
+    }
+    
+    
+    /**
+     * Adds commas to large numbers to seperate it in thousands
+     * @param {*} num a number
+     * @returns 
+     */
+    numberWithCommas(num) {
+        if (num > 1000) {
+            return num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        }
+        return num
     }
 
     

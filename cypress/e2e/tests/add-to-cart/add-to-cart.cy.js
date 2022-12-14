@@ -36,7 +36,7 @@ describe("Add-to-cart", () => {
      * Test Case ID: E2E_9
      * Test Scenario: Check add-to-cart functionality
      */
-    it("should verify that the user can add a product to the cart from the product details page", () => {
+    it("should verify that the user can add a product to the cart from the home page", () => {
         // add product to cart
         homePage.addToCart(1, product1.quantity)
 
@@ -44,7 +44,7 @@ describe("Add-to-cart", () => {
         total = product1.price * product1.quantity
 
         // wait for the page to load
-        cy.wait(2000)
+        cy.wait(4000)
 
         // assert that the product is in the cart
         cy.get(cartPage.firstProductCard)
@@ -57,11 +57,6 @@ describe("Add-to-cart", () => {
             .should("have.text", `${product1.quantity}`) // check product quantity
         cy.get(cartPage.cartTotal)
             .should("contain", `$${total}.00`) // check total
-
-        // close cart and check the price displayed on home page
-        cartPage.closeCart()
-        cy.get(homePage.cartButton)
-            .should("have.text", `$${cartPage.numberWithCommas(total)}.00`) // check price
     })
 
     /**
@@ -301,7 +296,7 @@ describe("Add-to-cart", () => {
         total = product3.price * product3.quantity
 
         // wait for the page to load
-        cy.wait(2000)
+        cy.wait(3000)
 
         // assert that the product is in the cart
         cy.get(cartPage.firstProductCard)
@@ -332,7 +327,7 @@ describe("Add-to-cart", () => {
         // assert that product is not in the cart
         cy.get(cartPage.firstProductCard)
             .should("not.exist")
-        cy.get(cartPage.emptyCartError)
+        cy.get(cartPage.cartError)
             .should("be.visible")
     })
 
@@ -352,7 +347,7 @@ describe("Add-to-cart", () => {
         // assert that product is not in the cart
         cy.get(cartPage.firstProductCard)
             .should("not.exist")
-        cy.get(cartPage.emptyCartError)
+        cy.get(cartPage.cartError)
             .should("be.visible")
 
         // close cart
