@@ -149,19 +149,6 @@ class Cart {
         return num
     }
 
-    
-    /**
-     * Adds commas to large numbers to seperate it in thousands
-     * @param {*} num a number
-     * @returns 
-     */
-    numberWithCommas(num) {
-        if (num > 1000) {
-            return num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
-        }
-        return num
-    }
-
 
     /**
      * Removes  the nth product card 
