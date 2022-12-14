@@ -39,10 +39,10 @@ describe("Cart", () => {
     it("should verify that the cart has all the items that were previously added", () => {
         // add multiple products to cart
         homePage.addToCart(1, product1.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(4, product4.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(6, product6.quantity)
 
@@ -83,10 +83,10 @@ describe("Cart", () => {
     it("should verify that the price for each product and the overall total are correct", () => {
         // add multiple products to cart
         homePage.addToCart(1, product1.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(4, product4.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(6, product6.quantity)
 
@@ -124,10 +124,10 @@ describe("Cart", () => {
     it("should verify that the user can modify the quantity of a product in the cart", () => {
         // add multiple products to cart
         homePage.addToCart(1, product1.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(4, product4.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(6, product6.quantity)
         
@@ -152,10 +152,10 @@ describe("Cart", () => {
     it("should verify that the user can remove products from the cart using the bin icon", () => {        
         // add multiple products to cart
         homePage.addToCart(1, product1.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(4, product4.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(6, product6.quantity)
         
@@ -181,10 +181,10 @@ describe("Cart", () => {
     it("should verify that the user can remove products from cart by decrementing the quantity until it reaches zero", () => {        
         // add multiple products to cart
         homePage.addToCart(1, product1.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(4, product4.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(6, product6.quantity)
         
@@ -210,10 +210,10 @@ describe("Cart", () => {
     it("should verify that the total number of products in the cart is correct", () => {
         // add multiple products to cart
         homePage.addToCart(1, product1.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(4, product4.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(6, product6.quantity)
         
@@ -237,7 +237,7 @@ describe("Cart", () => {
         homePage.addToCart(1, product1.quantity)
         
         // wait for page to load
-        cy.wait(2000)
+        cy.wait(3000)
 
         // assert that there is a back button
         cy.get(cartPage.backToHomeButton)

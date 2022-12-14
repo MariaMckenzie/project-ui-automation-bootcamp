@@ -44,7 +44,7 @@ class Cart {
     /**
      * @returns the selector for the button that closes the cart
      */
-    get backToHomeButton () { return (".snipcart-modal__close-title") }
+    get backToHomeButton () { return (".snipcart-cart-header__close-button") }
 
 
     /**
@@ -71,6 +71,36 @@ class Cart {
     get cartError () { return (".snipcart-empty-cart__title.snipcart__font--secondary.snipcart__font--xlarge.snipcart__font--bold") }
 
 
+    /**
+     * @returns the selector for the button that decrements the product quantity
+     */
+    get decrementQuantity () { return ("button[title='Decrement quantity']") }
+
+
+    /**
+     * @returns the selector for the button that increments the product quantity
+     */
+    get incrementQuantity () { return ("button[title='Increment quantity']") }
+    
+    
+    /**
+    * @returns the selector for the button to remove a product
+    */
+   get removeButton () { return ("button[title='Remove item']") }
+
+
+   /**
+    * @returns the selector for the number of products in the cart
+    */
+   get totalProducts () { return (".snipcart-cart-header__option.snipcart-cart-header__count.snipcart__font--secondary.snipcart__font--bold") }
+
+   
+   /**
+    * @returns the selector for the checkout button
+    */
+   get checkoutButton () { return (".snipcart-button-primary.snipcart-base-button.is-icon-right") }
+
+
 
     // METHODS
 
@@ -89,7 +119,7 @@ class Cart {
      * @returns the nth product card
      */
     getProductCard (itemNo) {
-        return (`${itemNo}`)  //TO BE FIXED
+        return (`${this.productsList} > li:nth-child(${itemNo})`)  //TO BE FIXED
     }
 
 
@@ -130,6 +160,34 @@ class Cart {
             return num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
         }
         return num
+    }
+
+
+    /**
+     * Removes  the nth product card 
+     * @param {Number} itemNo nth item in the list
+     */
+    removeProductFromCart (itemNo) {
+        cy.get(`.snipcart-item-list.snipcart-scrollbar.snipcart-item-list--no-shadow > li:nth-child(${itemNo}) > div > div ${this.removeButton}`).click()
+    }
+
+    
+    /**
+     * Decrements the product quantity
+     * @param {Number} itemNo nth item in the list
+     */
+    decrementProductQuantity (itemNo) {
+        cy.get(`.snipcart-item-list.snipcart-scrollbar.snipcart-item-list--no-shadow > li:nth-child(${itemNo}) > div > div ${this.decrementQuantity}`).click()
+    }
+
+
+    /**
+     * Increments the product quantity
+     * @param {Number} itemNo nth item in the list
+     */
+    incrementProductQuantity (itemNo) {
+        cy.get(`.snipcart-item-list.snipcart-scrollbar.snipcart-item-list--no-shadow > li:nth-child(${itemNo}) > div > div ${this.incrementQuantity}`).click()
+        return (`${itemNo}`)
     }
 
 }
