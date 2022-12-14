@@ -86,35 +86,27 @@ describe("Cart", () => {
         cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(4, product4.quantity)
-        cy.wait(1000)
-        cartPage.closeCart()
-        homePage.addToCart(6, product6.quantity)
 
         // wait for page to load
         cy.wait(2000)
 
         // calculate total
-        total = (product1.price * product1.quantity) + (product4.price * product4.quantity) + (product6.price * product6.quantity)
+        total = (product1.price * product1.quantity) + (product4.price * product4.quantity)
 
         // assert that the cart total and the product prices are correct
         cy.get(cartPage.cartTotal)
             .should("contain", `$${cartPage.numberWithCommas(total)}.00`)
 
         // product 1
-        cy.get(cartPage.getProductCardData(3)[0])
+        cy.get(cartPage.getProductCardData(2)[0])
             .should("contain", product1.name) // check product name
-        cy.get(cartPage.getProductCardData(3)[1])
+        cy.get(cartPage.getProductCardData(2)[1])
             .should("contain", `$${cartPage.numberWithCommas(product1.price * product1.quantity)}.00`) // check product price
         // product 2
-        cy.get(cartPage.getProductCardData(2)[0])
-            .should("contain", product4.name) // check product name
-        cy.get(cartPage.getProductCardData(2)[1])
-            .should("contain", `$${cartPage.numberWithCommas(product4.price * product4.quantity)}.00`) // check product price
-        // product 3
         cy.get(cartPage.getProductCardData(1)[0])
-            .should("contain", product6.name) // check product name
+            .should("contain", product4.name) // check product name
         cy.get(cartPage.getProductCardData(1)[1])
-            .should("contain", `$${cartPage.numberWithCommas(product6.price * product6.quantity)}.00`) // check product price
+            .should("contain", `$${cartPage.numberWithCommas(product4.price * product4.quantity)}.00`) // check product price
     })
     
     /**
@@ -136,7 +128,7 @@ describe("Cart", () => {
 
         // select one item and modify the quanitity
         cartPage.incrementProductQuantity(2) // modify product 2
-        cartPage.decrementProductQuantity(1) // modify product 1
+        cartPage.decrementProductQuantity(1) // modify product 1 
         
         // assert that the quantity is changed
         cy.get(cartPage.getProductCardData(2)[2])
