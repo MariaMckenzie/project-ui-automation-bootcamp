@@ -169,7 +169,7 @@ class Home {
      * @param {Number} quantity number of products required
      */
     addToCart (itemNo, quantity) {
-        if (quantity !== "" ||  isNaN(quantity) == true) {
+        if (quantity !== "" ||  isNaN(quantity) == false) {
             cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
             cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
             cy.get(`#product-${itemNo-1} ${this.addToCartButton}`).click()
@@ -186,23 +186,16 @@ class Home {
      * **(Note: The maximum number of products is 22)**
      * @param {Number} itemNo nth item in the list
      * @param {Number} quantity number of products required
-     * @returns a list containing the product name and price
      */
     modifyQuantity (itemNo, quantity) {
-        if (quantity !== "" ||  isNaN(quantity) == true) {
-            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
-            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
-        }
-        else {
-            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
-        }
+        cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
+        cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
     }
 
 
     /**
      * Search for product
      * @param {String} key keyword for search
-     * @returns a list containing the product name and price
      */
     search (key) {
         cy.get(this.searchBar).clear()
