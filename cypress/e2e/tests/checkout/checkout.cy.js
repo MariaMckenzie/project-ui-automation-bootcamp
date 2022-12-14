@@ -116,7 +116,7 @@ describe("Checkout", () => {
      * Test Case ID: E2E_48
      * Test Scenario: Check the functionality and UI of the checkout page
      */
-    it.only("should verify that the user cannot continue to payment if all the required fields (email, city, country) are empty", () => {
+    it("should verify that the user cannot continue to payment if all the required fields (email, city, country) are empty", () => {
         // add an item to cart
         homePage.addToCart(20, product20.quantity)
 
