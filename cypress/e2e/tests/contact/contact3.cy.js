@@ -4,7 +4,7 @@ import contactPage from "../../pages/contact.page"
 import homePage from "../../pages/home.page"
 import contactData from "../../data/data-driven/contact.data"
 
-describe('Contact (Data Driven)', () => {
+describe('Contact - Data Driven', () => {
 
     beforeEach(() => {
         cy.clearCookies() // clear all cookies before starting the tests
