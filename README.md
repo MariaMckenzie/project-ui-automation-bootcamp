@@ -47,4 +47,6 @@ OR
 With Report
 
 ```npm run test:spec cypress/e2e/tests/authentication/auth.cy.js```
+
+***N.B. Most test will run headless but for all tests to pass its best to run ```npm run cypress:open``` and run them there. Also, some tests may have to be ran more than once because cypress sometimes does not open the element or make it visible.***
  
