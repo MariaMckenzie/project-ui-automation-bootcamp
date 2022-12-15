@@ -39,12 +39,18 @@ describe("Add-to-cart", () => {
     it("should verify that the user can add a product to the cart from the home page", () => {
         // add product to cart
         homePage.addToCart(1, product1.quantity)
+        cy.wait(1000)
+
+        // in the event that cypress did not load the cart automatically
+        if (cy.get(homePage.firstProductCard).should("be.visible")) {
+            cy.get(homePage.cartButton).click( {force:true} ) // element is being covered by the cart that was supposed to be visible
+        }
 
         // calculate total
         total = product1.price * product1.quantity
 
         // wait for the page to load
-        cy.wait(4000)
+        cy.wait(2000)
 
         // assert that the product is in the cart
         cy.get(cartPage.firstProductCard)
@@ -215,7 +221,7 @@ describe("Add-to-cart", () => {
         homePage.goToProductDetailsPage(5)
 
         // wait for the page to load
-        cy.wait(1000)
+        cy.wait(2000)
 
         // assert that the user is on the product information page
         cy.url()
@@ -277,7 +283,7 @@ describe("Add-to-cart", () => {
         cy.visit("https://ui-automation-camp.vercel.app/products/quality-mousepad")
 
         // wait for the page to load
-        cy.wait(1000)
+        cy.wait(2000)
 
         // assert that the user is on the product information page
         cy.url()
