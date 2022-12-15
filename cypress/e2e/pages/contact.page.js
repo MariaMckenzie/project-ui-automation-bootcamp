@@ -143,11 +143,31 @@ class Contact {
      * @param {String} msg message
      */
     completeContactForm (fn, ln, email, sub, msg) {
-        cy.get(this.firstNameInput).type(fn)
-        cy.get(this.lastNameInput).type(ln)
-        cy.get(this.emailInput).type(email)
-        cy.get(this.subjectInput).type(sub)
-        cy.get(this.messageInput).type(msg)
+        cy.get(this.firstNameInput).clear()
+        cy.get(this.lastNameInput).clear()
+        cy.get(this.emailInput).clear()
+        cy.get(this.subjectInput).clear()
+        cy.get(this.messageInput).clear()
+
+        if (fn !== "") {
+            cy.get(this.firstNameInput).type(fn)
+        }
+
+        if (ln !== "") {
+            cy.get(this.lastNameInput).type(ln)
+        }
+        
+        if (email !== "") {
+            cy.get(this.emailInput).type(email)
+        }
+        
+        if (sub !== "") {
+            cy.get(this.subjectInput).type(sub)
+        }
+        
+        if (msg !== "") {
+            cy.get(this.messageInput).type(msg)
+        }
 
         cy.get(this.submitButton).click()
     }
