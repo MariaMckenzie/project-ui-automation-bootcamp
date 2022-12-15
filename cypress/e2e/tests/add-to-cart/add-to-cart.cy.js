@@ -98,10 +98,10 @@ describe("Add-to-cart", () => {
     it("should verify that the user can add multiple products to the cart from the product details page", () => {
         // add multiple products to cart
         homePage.addToCart(1, product1.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(2, product2.quantity)
-        cy.wait(500)
+        cy.wait(1000)
         cartPage.closeCart()
         homePage.addToCart(6, product6.quantity)
 
@@ -147,7 +147,7 @@ describe("Add-to-cart", () => {
     it("should verify that the user can add an item to cart from the product details page", () => {
         // select product and visit product details page 
         homePage.goToProductDetailsPage(1)
-        cy.wait(500)
+        cy.wait(1000)
 
         // assert that the user is on the product information page
         cy.url()
@@ -215,7 +215,7 @@ describe("Add-to-cart", () => {
         homePage.goToProductDetailsPage(5)
 
         // wait for the page to load
-        cy.wait(500)
+        cy.wait(1000)
 
         // assert that the user is on the product information page
         cy.url()
@@ -277,7 +277,7 @@ describe("Add-to-cart", () => {
         cy.visit("https://ui-automation-camp.vercel.app/products/quality-mousepad")
 
         // wait for the page to load
-        cy.wait(500)
+        cy.wait(1000)
 
         // assert that the user is on the product information page
         cy.url()
