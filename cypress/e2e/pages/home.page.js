@@ -150,7 +150,7 @@ class Home {
      * @param {Number} quantity number of products required
      */
     addToCart (itemNo, quantity) {
-        if (quantity !== "" ||  isNaN(quantity) == true) {
+        if (quantity !== "") {
             cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
             cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
             cy.get(`#product-${itemNo-1} ${this.addToCartButton}`).click()
@@ -170,7 +170,7 @@ class Home {
      * @returns a list containing the product name and price
      */
     modifyQuantity (itemNo, quantity) {
-        if (quantity !== "" ||  isNaN(quantity) == true) {
+        if (quantity !== "" ) {
             cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
             cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
         }
