@@ -6,7 +6,7 @@ import homePage from "../../pages/home.page"
 import detailsPage from "../../pages/details.page"
 
 
-describe("Add-to-cart", () => {
+describe("Add-to-cart (09 - 13)", () => {
     // variables
     let total
 
@@ -243,6 +243,7 @@ describe("Add-to-cart", () => {
         cy.get(cartPage.cartTotal)
             .should("contain", `$${total}.00`) // check total
     })
+<<<<<<< Updated upstream
     
     /**
      * Test Case ID: E2E_14
@@ -373,5 +374,7 @@ describe("Add-to-cart", () => {
         cy.get(cartPage.getProductCardData(1)[2])
             .should("have.text", `${productData.product13.quantity}`) // check product quantity
     })
+=======
+>>>>>>> Stashed changes
 
 })
