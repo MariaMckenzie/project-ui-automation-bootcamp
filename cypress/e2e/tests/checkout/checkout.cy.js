@@ -37,8 +37,6 @@ describe("Checkout (45 - 49)", () => {
         
         // wait for the page to load
         cy.wait(2000)
-<<<<<<< Updated upstream
-=======
 
         // assert that the cart is empty and the checkout button does not exist
         cy.get(cartPage.cartError)
@@ -48,7 +46,6 @@ describe("Checkout (45 - 49)", () => {
             .should("not.exist")
         cy.get(cartPage.checkoutButton)
             .should("not.exist")
->>>>>>> Stashed changes
      })
 
     /**
@@ -158,31 +155,6 @@ describe("Checkout (45 - 49)", () => {
     it("should verify that the user can move on to 'payments' once all required fields are filled", () => {
         // add an item to cart
         homePage.addToCart(20, productData.product20.quantity)
-<<<<<<< Updated upstream
-
-        // calculate the total
-        total = productData.product20.price * productData.product20.quantity
-    
-        // wait for the page to load
-        cy.wait(2000)
-
-        // go to checkout
-        cy.get(cartPage.checkoutButton).click()
-
-        // waitfor the page to load
-        cy.wait(2000)
-
-        // go to payments section
-        checkoutPage.addBillingInformation(userData.existingUser.name, userData.existingUser.email, userData.existingUser.addr)
-    })
-
-    /**
-     * Test Case ID: E2E_50
-     * Test Scenario: Check the functionality and UI of the checkout page
-     */
-    it("should verify that the modifications made to the billing address are saved", () => {
-        // add an item to cart
-        homePage.addToCart(20, productData.product20.quantity)
 
         // calculate the total
         total = productData.product20.price * productData.product20.quantity
@@ -198,145 +170,7 @@ describe("Checkout (45 - 49)", () => {
 
         // go to payments section
         checkoutPage.addBillingInformation(userData.existingUser.name, userData.existingUser.email, userData.existingUser.addr)
-
-        // go back to billing information
-        cy.get(checkoutPage.editBillingButton).click()
-
-        // wait for the page to load
-        cy.wait(2000)
-
-        // edit billing information
-        cy.get(checkoutPage.nameInput).clear()
-        cy.get(checkoutPage.nameInput).type("Jane Doe", {force: true})
-        cy.get(checkoutPage.continueButton).click({force: true})
-
-        // assert that billing information is chnaged
-        cy.get(checkoutPage.billingInfo)
-            .should("contain", 'Jane Doe')
-
     })
 
-    /**
-     * Test Case ID: E2E_51
-     * Test Scenario: Check the functionality and UI of the checkout page
-     * Note: Test does not work, instead it goes completes the checkout process
-     */
-    it.skip("should verify that the payment process cannot be completed unless the user enters the card information", () => { 
-        // add an item to cart
-        homePage.addToCart(20, productData.product20.quantity)
-
-        // calculate the total
-        total = productData.product20.price * productData.product20.quantity
-    
-        // wait for the page to load
-        cy.wait(2000)
-
-        // go to checkout
-        cy.get(cartPage.checkoutButton).click()
-
-        // wait for the page to load
-        cy.wait(2000)
-
-        // go to payments section
-        checkoutPage.addBillingInformation(userData.existingUser.name, userData.existingUser.email, userData.existingUser.addr)
-
-        // wait for the page to load
-        cy.wait(2000)
-
-        // attempt to checkout
-        cy.get(checkoutPage.placeOrderButton).click()
-
-        // wait for the page to load
-        cy.wait(2000)
-
-        // assert that the user cannot checkout
-        cy.url()
-            .should("not.contain", "/order/")
-        cy.get(thankyouPage.title)
-            .should("not.exist")
-            .and("not.contain", "Thank you for your order")
-
-    })
-
-    /**
-     * Test Case ID: E2E_52
-     * Test Scenario: Check the functionality and UI of the checkout page
-     * Note: Test does not work, instead it goes completes the checkout process
-     */
-    it.skip("should verify that the user cannot complete the payment process unless the card is not expired", () => { 
-        // add an item to cart
-        homePage.addToCart(20, productData.product20.quantity)
-=======
->>>>>>> Stashed changes
-
-        // calculate the total
-        total = productData.product20.price * productData.product20.quantity
-    
-        // wait for the page to load
-        cy.wait(2000)
-
-        // go to checkout
-        cy.get(cartPage.checkoutButton).click()
-
-        // wait for the page to load
-        cy.wait(2000)
-
-        // go to payments section
-        checkoutPage.addBillingInformation(userData.existingUser.name, userData.existingUser.email, userData.existingUser.addr)
-<<<<<<< Updated upstream
-
-        // wait for the page to load
-        cy.wait(2000)
-
-        // assert that the user cannot checkout with invalid card date
-        checkoutPage.addCardInformation(userData.existingUser.cardInfo[0], 1021, userData.existingUser.cardInfo[2])
-        cy.url()
-            .should("not.contain", "/order/")
-        cy.get(thankyouPage.title)
-            .should("not.exist")
-            .and("not.contain", "Thank you for your order")
-    })
-
-    /**
-     * Test Case ID: E2E_53
-     * Test Scenario: Check the functionality and UI of the checkout page
-     */
-    it("should verify that the user can complete the payment process", () => {
-        // add an item to cart
-        homePage.addToCart(20, productData.product20.quantity)
-
-        // calculate the total
-        total = productData.product20.price * productData.product20.quantity
-    
-        // wait for the page to load
-        cy.wait(2000)
-
-        // go to checkout
-        cy.get(cartPage.checkoutButton).click()
-
-        // wait for the page to load
-        cy.wait(2000)
-
-        // go to payments section
-        checkoutPage.addBillingInformation(userData.existingUser.name, userData.existingUser.email, userData.existingUser.addr)
-
-        // wait for the page to load
-        cy.wait(2000)
-
-        // assert that the user can checkout
-        checkoutPage.addCardInformation(userData.existingUser.cardInfo[0], userData.existingUser.cardInfo[1], userData.existingUser.cardInfo[2])
-        cy.url()
-            .should("contain", "/order/")
-        cy.get(thankyouPage.title)
-            .should("be.visible")
-            .and("contain", "Thank you for your order")
-        cy.get(thankyouPage.invoiceNumber)
-            .should("be.visible")
-    })
-    
-=======
-    })
-
->>>>>>> Stashed changes
 })
   
