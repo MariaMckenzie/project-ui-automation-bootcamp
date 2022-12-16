@@ -171,10 +171,6 @@ class Home {
     addToCart (itemNo, quantity) {
         if (quantity !== "") {
             cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear()
-=======
-        if (quantity !== "") {
-            cy.get(`#product-${itemNo-1} ${this.productQuantity}`).clear( {force:true} )
->>>>>>> Stashed changes
             cy.get(`#product-${itemNo-1} ${this.productQuantity}`).type(quantity)
             cy.get(`#product-${itemNo-1} ${this.addToCartButton}`).click()
         }
