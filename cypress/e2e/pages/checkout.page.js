@@ -187,19 +187,35 @@ class Checkout {
      * @param {String[]} addr address - [address line 1, city, state, country, postal code]
      */
     addBillingInformation (name, email, addr) {
-        if (email === "" & addr[1] === "") {
-            cy.get(this.continueButton).click()
-        } else {
+        if (name !== "")  {
             cy.get(this.nameInput).type(name)
-            cy.get(this.emailInput).type(email)
-            cy.get(this.address1Input).type(addr[0])
-            cy.get(this.cityInput).type(addr[1])
-            cy.get(this.countryInput).select(addr[3])
-            cy.get(this.stateInput).type(addr[2])
-            cy.get(this.postalCodeInput).type(addr[4])
-    
-            cy.get(this.continueButton).click({force: true})
         }
+
+        if (email !== "")  {
+            cy.get(this.emailInput).type(email)
+        }
+
+        if (addr[0] !== "") {
+            cy.get(this.address1Input).type(addr[0])
+        }
+
+        if (addr[1] !== "") {
+            cy.get(this.cityInput).type(addr[1])
+        }
+
+        if (addr[2] !== "") {
+            cy.get(this.countryInput).select(addr[3])
+        }
+
+        if (addr[3] !== "") {
+            cy.get(this.stateInput).type(addr[2])
+        }
+
+        if (addr[4] !== "") {
+            cy.get(this.postalCodeInput).type(addr[4])
+        }
+   
+        cy.get(this.continueButton).click({force: true})
     }
     
 
@@ -210,7 +226,7 @@ class Checkout {
      * @param {Number} cvv card cvv
      */
     addCardInformation (cardNumber, expiryDate, cvv) {
-        if (cardNumber === "" || isNaN(cardNumber)) {
+        if (cardNumber === "") {
             cy.get(".snipcart-payment-card-form > iframe")
                 .its("0.contentDocument.body")
                 .then(cy.wrap)
@@ -222,7 +238,7 @@ class Checkout {
                 .find(this.cardNumberInput).type(cardNumber)
         }
 
-        if (expiryDate === "" || isNaN(expiryDate)) {
+        if (expiryDate === "") {
             cy.get(".snipcart-payment-card-form > iframe")
                 .its("0.contentDocument.body")
                 .then(cy.wrap)
@@ -256,7 +272,7 @@ class Checkout {
                 .find(this.expiryDateInput).type(expiryDate)
         }
 
-        if (cvv === "" || isNaN(cvv)) {
+        if (cvv === "") {
             cy.get(".snipcart-payment-card-form > iframe")
                 .its("0.contentDocument.body")
                 .then(cy.wrap)
