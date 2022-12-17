@@ -38,7 +38,7 @@ describe("Add-to-cart (09 - 13)", () => {
      */
     it("should verify that the user can add a product to the cart from the home page", () => {
         // add product to cart
-        homePage.addToCart(1, productData.product1.quantity)
+        homePage.addToCart(productData.product1.number, productData.product1.quantity)
         cy.wait(1000)
 
         // in the event that cypress did not load the cart automatically
@@ -71,7 +71,7 @@ describe("Add-to-cart (09 - 13)", () => {
      */
     it("should verify that the user can add multiple of the same product to cart", () => {
         // add product to cart
-        homePage.addToCart(19, productData.product19.quantity)
+        homePage.addToCart(productData.product19.number, productData.product19.quantity)
 
         // calculate total
         total = productData.product19.price * productData.product19.quantity
@@ -103,13 +103,13 @@ describe("Add-to-cart (09 - 13)", () => {
      */
     it("should verify that the user can add multiple products to the cart from the product details page", () => {
         // add multiple products to cart
-        homePage.addToCart(1, productData.product1.quantity)
+        homePage.addToCart(productData.product1.number, productData.product1.quantity)
         cy.wait(1000)
         cartPage.closeCart()
-        homePage.addToCart(2, productData.product2.quantity)
+        homePage.addToCart(productData.product2.number, productData.product2.quantity)
         cy.wait(1000)
         cartPage.closeCart()
-        homePage.addToCart(6, productData.product6.quantity)
+        homePage.addToCart(productData.product6.number, productData.product6.quantity)
 
         // calculate total
         total = (productData.product1.price * productData.product1.quantity) + (productData.product2.price * productData.product2.quantity) + (productData.product6.price * productData.product6.quantity)
@@ -152,7 +152,7 @@ describe("Add-to-cart (09 - 13)", () => {
      */
     it("should verify that the user can add an item to cart from the product details page", () => {
         // select product and visit product details page 
-        homePage.goToProductDetailsPage(1)
+        homePage.goToProductDetailsPage(productData.product1.number)
         cy.wait(1000)
 
         // assert that the user is on the product information page
@@ -192,7 +192,7 @@ describe("Add-to-cart (09 - 13)", () => {
      */
     it("should verify that the user can add add one item to cart from the product details page and add the same item again from the product details page", () => {
         //  add product to cart
-        homePage.addToCart(5, productData.product5.quantity)
+        homePage.addToCart(productData.product5.number, productData.product5.quantity)
         
         // calculate total
         total = productData.product5.price * productData.product5.quantity
