@@ -1,7 +1,7 @@
 import userData from "../../data/user.data"
 import authenticationPage from "../../pages/authentication.page"
 import homePage from "../../pages/home.page"
-
+import { faker } from '@faker-js/faker'
 
 describe('Authentication (01 - 04)', () => {
     beforeEach(() => {
@@ -14,6 +14,7 @@ describe('Authentication (01 - 04)', () => {
      * Test Scenario: Check sign up functionality
      */
     it('should verify that the user cannot sign up if one or more input fields are missing', () => {
+        console.log(randomEmail, randomName)
         cy.get(authenticationPage.signInOrRegisterButton).click()
 
         // wait for the page to load and select the sign up section
@@ -104,7 +105,10 @@ describe('Authentication (01 - 04)', () => {
      * Test Case ID: E2E_4
      * Test Scenario: Check sign up functionality
      */ 
-     it.skip('should verify that the user can sign up using a unique and valid email address and password', () => {
+     it('should verify that the user can sign up using a unique and valid email address and password', () => {
+        // variables        
+        const email = faker.internet.email()
+
         cy.get(authenticationPage.signInOrRegisterButton).click()
 
         // wait for the page to load and select the sign up section
@@ -112,7 +116,7 @@ describe('Authentication (01 - 04)', () => {
         cy.get(authenticationPage.signupSection).click()
 
         // attempt to sign up using a email address and password 
-        authenticationPage.loginOrSignup(userData.newUser.email, userData.newUser.password)
+        authenticationPage.loginOrSignup(email, userData.existingUser.password)
 
         // assert that sign up is successful
         cy.url()
