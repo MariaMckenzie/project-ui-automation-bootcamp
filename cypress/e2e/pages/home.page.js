@@ -30,6 +30,12 @@ class Home {
 
 
     /**
+     * @returns the selector for the button linked to the favourites page
+     */
+    get favouritesButton () { return ("#top-favorite") }
+
+
+    /**
      * @returns the selector for the button linked to the about page
      */
     get aboutButton () { return ("#top-about") }
