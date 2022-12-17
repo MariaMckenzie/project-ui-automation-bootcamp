@@ -119,7 +119,7 @@ class Details {
      * @param {Number} quantity number of products required
      */
     modifyQuantity (quantity) {
-        if (quantity === "" ||  isNaN(quantity)) {
+        if (quantity === "") {
             cy.get(this.productQuantity).clear()
         }
         else {

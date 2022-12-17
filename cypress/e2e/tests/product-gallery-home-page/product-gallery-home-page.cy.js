@@ -109,13 +109,13 @@ describe('Product Gallery / Home Page (26 - 30)', () => {
             .and("contain.text", productData.product1.name)
 
         // check for other products
-        cy.get(homePage.getProductCard(5))
+        cy.get(homePage.getProductCard(productData.product5.number))
             .should("be.visible")
             .and("contain.text", productData.product5.name)
-        cy.get(homePage.getProductCard(17))
+        cy.get(homePage.getProductCard(productData.product17.number))
             .should("be.visible")
             .and("contain.text", productData.product17.name)
-        cy.get(homePage.getProductCard(22))
+        cy.get(homePage.getProductCard(productData.product22.number))
             .should("be.visible") // last product
             .and("contain.text", productData.product22.name)
     })
