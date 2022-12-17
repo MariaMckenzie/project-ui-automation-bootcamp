@@ -34,7 +34,7 @@ describe("Checkout (50 - 53)", () => {
      */
     it("should verify that the modifications made to the billing address are saved", () => {
         // add an item to cart
-        homePage.addToCart(20, productData.product20.quantity)
+        homePage.addToCart(productData.product20.number, productData.product20.quantity)
 
         // calculate the total
         total = productData.product20.price * productData.product20.quantity
@@ -75,7 +75,7 @@ describe("Checkout (50 - 53)", () => {
      */
     it.skip("should verify that the payment process cannot be completed unless the user enters the card information", () => { 
         // add an item to cart
-        homePage.addToCart(20, productData.product20.quantity)
+        homePage.addToCart(productData.product20.number, productData.product20.quantity)
 
         // calculate the total
         total = productData.product20.price * productData.product20.quantity
@@ -117,7 +117,7 @@ describe("Checkout (50 - 53)", () => {
      */
     it.skip("should verify that the user cannot complete the payment process unless the card is not expired", () => { 
         // add an item to cart
-        homePage.addToCart(20, productData.product20.quantity)
+        homePage.addToCart(productData.product20.number, productData.product20.quantity)
 
         // calculate the total
         total = productData.product20.price * productData.product20.quantity
@@ -152,7 +152,7 @@ describe("Checkout (50 - 53)", () => {
      */
     it("should verify that the user can complete the payment process", () => {
         // add an item to cart
-        homePage.addToCart(20, productData.product20.quantity)
+        homePage.addToCart(productData.product20.number, productData.product20.quantity)
 
         // calculate the total
         total = productData.product20.price * productData.product20.quantity

@@ -54,7 +54,7 @@ describe("Checkout (45 - 49)", () => {
      */
     it("should verify that the user can go back to the home page using the back button", () => { 
         // add an item to cart
-        homePage.addToCart(20, productData.product20.quantity)
+        homePage.addToCart(productData.product20.number, productData.product20.quantity)
     
         // wait for the page to load
         cy.wait(2000)
@@ -80,7 +80,7 @@ describe("Checkout (45 - 49)", () => {
      */
     it("should verify that the order summary is correct", () => {         
         // add an item to cart
-        homePage.addToCart(20, productData.product20.quantity)
+        homePage.addToCart(productData.product20.number, productData.product20.quantity)
 
         // calculate the total
         total = productData.product20.price * productData.product20.quantity
@@ -117,7 +117,7 @@ describe("Checkout (45 - 49)", () => {
      */
     it("should verify that the user cannot continue to payment if all the required fields (email, city, country) are empty", () => {
         // add an item to cart
-        homePage.addToCart(20, productData.product20.quantity)
+        homePage.addToCart(productData.product20.number, productData.product20.quantity)
 
         // calculate the total
         total = productData.product20.price * productData.product20.quantity
@@ -154,7 +154,7 @@ describe("Checkout (45 - 49)", () => {
      */
     it("should verify that the user can move on to 'payments' once all required fields are filled", () => {
         // add an item to cart
-        homePage.addToCart(20, productData.product20.quantity)
+        homePage.addToCart(productData.product20.number, productData.product20.quantity)
 
         // calculate the total
         total = productData.product20.price * productData.product20.quantity
