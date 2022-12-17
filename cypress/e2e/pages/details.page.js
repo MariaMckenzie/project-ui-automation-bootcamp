@@ -8,7 +8,7 @@ class Details {
     /**
      * @returns the selector for the navigation bar
      */
-    get navBar () { return ("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2)") }
+    get navBar () { return (".css-1lv9dyw") }
 
 
     /**
