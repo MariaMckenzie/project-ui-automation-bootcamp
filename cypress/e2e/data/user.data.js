@@ -5,7 +5,7 @@ module.exports = {
         errorMsg: ""
     },
     existingUser: {
-        email: "johndoe1@mail.com",
+        email: "johndoe2@mail.com",
         password: "P@ssword1",
         errorMsg: ""
     },
