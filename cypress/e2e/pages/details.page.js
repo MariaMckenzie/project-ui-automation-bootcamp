@@ -99,6 +99,18 @@ class Details {
      */
     get addToCartButton () { return ("#add-to-cart") }
 
+    
+    /**
+     * @returns the selector for the favourites icon on each product card that adds a product to favourites
+     */
+    get addToFavouritesIcon () { return ("#add-to-favorite") }
+
+
+    /**
+     * @returns the selector for the favourites icon on each product card that removes a product from favourites
+     */
+    get removeFromFavouritesIcon () { return ("#remove-from-favorite") }
+
      
 
     // METHODS
