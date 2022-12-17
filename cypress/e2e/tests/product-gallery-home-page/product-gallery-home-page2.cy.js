@@ -54,12 +54,12 @@ describe('Product Gallery / Home Page (31 - 35)', () => {
      */
     it("should verify that the user can select a product", () => {
         // check for a product
-        cy.get(homePage.getProductCard(5))
+        cy.get(homePage.getProductCard(productData.product5.number))
             .should("be.visible")
             .and("contain.text", productData.product5.name)
 
         // select the product
-        homePage.goToProductDetailsPage(5)
+        homePage.goToProductDetailsPage(productData.product5.number)
 
         // assert that the user is redirected to the product details page 
         cy.url()
@@ -74,7 +74,7 @@ describe('Product Gallery / Home Page (31 - 35)', () => {
      */
     it("should verify that the user can view the total of their cart", () => {
         // add product to cart
-        homePage.addToCart(19, productData.product19.quantity)
+        homePage.addToCart(productData.product19.number, productData.product19.quantity)
 
         // calculate total
         total = productData.product19.price * productData.product19.quantity
@@ -91,14 +91,14 @@ describe('Product Gallery / Home Page (31 - 35)', () => {
      */
     it("should verify that the user can modify the quantity of a product using numeric characters", () => {
         // check that the default quantity is 1
-        cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`)
+        cy.get(`${homePage.getProductCard(productData.product13.number)} ${homePage.productQuantity}`)
             .should("contain.value", 1)
 
         // modify quantity
-        homePage.modifyQuantity(13, productData.product13.quantity)
+        homePage.modifyQuantity(productData.product13.number, productData.product13.quantity)
 
         // check that the quantity has changed and is not equal to 1 (default)
-        cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`)
+        cy.get(`${homePage.getProductCard(productData.product13.number)} ${homePage.productQuantity}`)
             .should("contain.value", productData.product13.quantity)
             .and("not.contain", "1")
     })
@@ -109,15 +109,15 @@ describe('Product Gallery / Home Page (31 - 35)', () => {
      */
     it("should verify that the user cannot modify the quantity of a product with non-numeric characters", () => {  
         // check that the default quantity is 1
-        cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`)
+        cy.get(`${homePage.getProductCard(productData.product13.number)} ${homePage.productQuantity}`)
             .should("contain.value", 1)
 
         // add product to cart using invalid input 
-        homePage.addToCart(13, "a")
+        homePage.addToCart(productData.product13.number, "a")
         cy.once('uncaught:exception', () => false);
 
         // check that the quantity input has now become blank
-        cy.get(`${homePage.getProductCard(13)} ${homePage.productQuantity}`)
+        cy.get(`${homePage.getProductCard(productData.product13.number)} ${homePage.productQuantity}`)
             .should("have.text", "")
             .and("not.contain", "1")
     })
