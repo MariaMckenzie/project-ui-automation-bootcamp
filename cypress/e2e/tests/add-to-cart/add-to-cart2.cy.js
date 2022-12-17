@@ -43,7 +43,7 @@ describe("Add-to-cart (14 - 17)", () => {
         // assert that item is found and select item
         cy.get(homePage.getProductCardData(1)[0])
             .should("contain", productData.product18.name)
-        homePage.addToCart(1, productData.product18.quantity)
+        homePage.addToCart(productData.product1.number, productData.product18.quantity)
 
         // calculate total
         total = productData.product18.price * productData.product18.quantity
@@ -111,7 +111,7 @@ describe("Add-to-cart (14 - 17)", () => {
      */
     it("should verify that the user cannot add a product to cart with blank quantity", () => {
         // add product to cart with blank quantity
-        homePage.addToCart(13, "")
+        homePage.addToCart(productData.product13.number, "")
         cy.once("uncaught:exception", () => false);
 
         // go to cart
@@ -131,7 +131,7 @@ describe("Add-to-cart (14 - 17)", () => {
      */
     it("should verify that the user can only use numeric characters as input for quantity", () => {
         // add product to cart using invalid input 
-        homePage.addToCart(13, "a")
+        homePage.addToCart(productData.product13.number, "a")
         cy.once("uncaught:exception", () => false);
         
         // go to cart
@@ -148,7 +148,7 @@ describe("Add-to-cart (14 - 17)", () => {
         cartPage.closeCart()
 
         // add a valid number and add product to cart
-        homePage.addToCart(13, productData.product13.quantity)
+        homePage.addToCart(productData.product13.number, productData.product13.quantity)
         cy.wait(2000)
 
         // assert that the product is in the cart
