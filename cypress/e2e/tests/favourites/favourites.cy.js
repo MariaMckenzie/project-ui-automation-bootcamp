@@ -186,8 +186,8 @@ describe('Favourites', () => {
         // add product to favourites
         cy.get(detailsPage.addToFavouritesIcon).click()
         
-        count += 1 // count the toast
-        total += 1 // count the number of products
+        count = 1 // count the toast
+        total = 1 // count the number of products
 
         // assert that the product is added
         cy.get(detailsPage.getToast(count))
@@ -224,8 +224,8 @@ describe('Favourites', () => {
         // add product to favourites
         cy.get(detailsPage.addToFavouritesIcon).click()
         
-        count += 1 // count the toast
-        total += 1 // count the number of products
+        count = 1 // count the toast
+        total = 1 // count the number of products
 
         // assert that the product is added
         cy.get(detailsPage.getToast(count))
@@ -254,8 +254,8 @@ describe('Favourites', () => {
         // add product to favourites (1)
         favouritesPage.addToFavourites(productData.product1.number)
 
-        count += 1 // count the toast
-        total += 1 // count the number of products        
+        count = 1 // count the toast
+        total = 1 // count the number of products        
 
         // assert that the product is added
         cy.get(favouritesPage.getToast(count))
@@ -302,8 +302,8 @@ describe('Favourites', () => {
         // add a product to favourites
         favouritesPage.addToFavourites(productData.product1.number)
         
-        count += 1 // count the toast
-        total += 1 // count the number of products
+        count = 1 // count the toast
+        total = 1 // count the number of products
 
         // assert that the product is added
         cy.get(favouritesPage.getToast(count))
@@ -326,17 +326,17 @@ describe('Favourites', () => {
 
         // remove product
         cy.get(favouritesPage.removeFromFavouritesButton).click()
+        total -= 1 // count the number of products
 
         // assert that the product is removed        
-        cy.get(favouritesPage.getToast(count))
-            .should("contain.text", `${productData.product1.name} removed from favorites`)
-            .and("have.css", "background-color", "rgb(254, 215, 215)")
-
         cy.get(favouritesPage.firstProductCard)
             .should("not.exist")
         
         cy.get(favouritesPage.emptyListText)
             .should("contain.text", "No favorites added")
+        
+        cy.get(detailsPage.favouritesButton)
+            .should("contain.text", `[${total}]`)
     })
 
 
