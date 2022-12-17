@@ -2,10 +2,12 @@ import productData from "../../data/product.data"
 import userData from "../../data/user.data"
 import authenticationPage from "../../pages/authentication.page"
 import homePage from "../../pages/home.page"
+import favouritesPage from "../../pages/favourites.page"
+import detailsPage from "../../pages/details.page"
 
-describe('Product Gallery / Home Page (26 - 30)', () => {
+describe('Favourites', () => {
     // variables
-    let total
+    let count = 0, total = 0
 
     beforeEach(() => {
         cy.clearCookies() // clear all cookies before starting the tests
@@ -24,100 +26,183 @@ describe('Product Gallery / Home Page (26 - 30)', () => {
         cy.wait(2000)
     })
 
+    
+    it("01: Verifies that the navigation bar is visible", () => {
+        // go to favourites 
+        cy.get(homePage.favouritesButton).click()
 
-    /**
-     * Test Case ID: E2E_26
-     * Test Scenario: Check the functionality and UI of the product home page
-     */
-    it("should verify that the ‘Home’ button is active", () => {
-        // assert that the home button is visible
-        cy.get(homePage.homeButton)            
-            .should("be.visible")
-            .and("contain.text", "Home")
-            .and("have.css", "background-color", "rgb(49, 151, 149)") // button background colour
-            .and("have.css", "color", "rgb(255, 255, 255)") // text colour
-    })
+        // wait for the page to load
+        cy.wait(2000)
 
-    /**
-     * Test Case ID: E2E_27
-     * Test Scenario: Check the functionality and UI of the product home page
-     */
-    it("should verify that the navigation bar is visible", () => {
         // assert that the nav bar is visible
-        cy.get(homePage.navBar)
+        cy.get(favouritesPage.navBar)
             .should("be.visible")
 
         // assert that the buttons in the nav bar are visible - (home, about, contact, cart, sign out)
-        cy.get(homePage.homeButton)
+        cy.get(favouritesPage.homeButton)
             .should("be.visible")
             .and("contain.text", "Home")
-        cy.get(homePage.contactButton)
+        cy.get(favouritesPage.contactButton)
             .should("be.visible")
             .and("contain.text", "Contact")
-        cy.get(homePage.cartButton)
+        cy.get(favouritesPage.cartButton)
             .should("be.visible")
             .and("contain.text", "0.00")
-        cy.get(homePage.logoutButton)
+        cy.get(favouritesPage.logoutButton)
             .should("be.visible")
             .and("contain.text", "Sign Out")
     })
 
-    /**
-     * Test Case ID: E2E_28
-     * Test Scenario: Check the functionality and UI of the product home page
-     */
-    it("should verify that the store’s name and logo are visible at the top of the page", () => {        
+    
+    it("02: Verifies that the store’s name and logo are visible at the top of the page", () => { 
+        // go to favourites 
+        cy.get(homePage.favouritesButton).click()
+
+        // wait for the page to load
+        cy.wait(2000)
+
         // assert that the nav bar is visible
-        cy.get(homePage.navBar)
+        cy.get(favouritesPage.navBar)
             .should("be.visible")
         
         // assert that the logo and store name are visible
-        cy.get(homePage.storeName)
+        cy.get(favouritesPage.storeName)
             .should("be.visible")
             .and("contain", "Automation Camp Store")
-        cy.get(homePage.storeImage)
+        cy.get(favouritesPage.storeImage)
             .should("be.visible")
             .and("have.attr", "src", "/favicon.ico")
     })
 
-    /**
-     * Test Case ID: E2E_29
-     * Test Scenario: Check the functionality and UI of the product home page
-     */
-    it("should verify that the user can sign out successfully", () => {
+    
+    it("03: Verifies that the user can sign out successfully from the Favourites page", () => {
+        // go to favourites 
+        cy.get(homePage.favouritesButton).click()
+
+        // wait for the page to load
+        cy.wait(2000)
+
         // assert that the sign out button is visible
-        cy.get(homePage.logoutButton)
+        cy.get(favouritesPage.logoutButton)
             .should("be.visible")
             .and("contain.text", "Sign Out")
 
         // logout
-        cy.get(homePage.logoutButton).click()
+        cy.get(favouritesPage.logoutButton).click()
 
         // assert that the user is signed out
         cy.url()
             .should("eq", "https://ui-automation-camp.vercel.app/")
     })
 
-    /**
-     * Test Case ID: E2E_30
-     * Test Scenario: Check the functionality and UI of the product home page
-     */
-    it("should verify that the search bar, and sort and filter options are visible.", () => {
-        // check for the first product 
-        cy.get(homePage.getProductCard(1))
+
+    it("04: Verifies that the 'Favourites' button is active", () => {
+        // go to favourites 
+        cy.get(homePage.favouritesButton).click()
+
+        // wait for the page to load
+        cy.wait(2000)
+
+        // assert that the favourites button is highlighted
+        cy.get(favouritesPage.favouritesButton)            
+            .should("be.visible")
+            .and("contain.text", "Favorites")
+            .and("have.css", "background-color", "rgb(49, 151, 149)") // button background colour
+            .and("have.css", "color", "rgb(255, 255, 255)") // text colour
+    })
+
+    
+    it("05: Verifies that the user can add a product to favourites from the home page", () => {
+        // add a product to favourites
+        favouritesPage.addToFavourites(productData.product1.number)
+        
+        count += 1 // count the toast
+        total += 1 // count the number of items
+
+        // assert that the product is added
+        cy.get(favouritesPage.getToast(count))
+            .should("be.visible")
+            .and("contain.text", `${productData.product1.name} added to favorites`)
+
+        cy.get(favouritesPage.favouritesButton)
+            .should("contain.text", `[${total}]`)
+        
+        // go to favourites 
+        cy.get(homePage.favouritesButton).click()
+
+        // wait for the page to load
+        cy.wait(2000)
+
+        // assert that the item is in favourites
+        cy.get(favouritesPage.firstProductCard)
             .should("be.visible")
             .and("contain.text", productData.product1.name)
+    })
 
-        // check for other products
-        cy.get(homePage.getProductCard(5))
+    
+    it("06: Verifies that the user can remove a product from favourites from the home page", () => {
+        // add a product to favourites
+        favouritesPage.addToFavourites(productData.product1.number)
+        
+        count = 1 // count the toast
+        total = 1 // count the number of items
+
+        // assert that the product is added
+        cy.get(favouritesPage.getToast(count))
+            .should("contain.text", `${productData.product1.name} added to favorites`)
+            .and("have.css", "background-color", "rgb(198, 246, 213)")
+
+        cy.get(favouritesPage.favouritesButton)
+            .should("contain.text", `[${total}]`)
+                
+        // remove item from favourites
+        favouritesPage.removeFromFavourites(productData.product1.number)
+
+        count += 1 // count the toast
+        total -= 1 // count the number of items
+
+        // assert that the product is removed
+        cy.get(favouritesPage.getToast(count))
+            .should("contain.text", `${productData.product1.name} removed from favorites`)
+            .and("have.css", "background-color", "rgb(254, 215, 215)")
+
+        cy.get(favouritesPage.favouritesButton)
+            .should("contain.text", `[${total}]`)
+    })
+
+    
+    it("07: Verifies that the user can add a product to favourites from the product details page", () => {
+        // go to product details page
+        cy.visit("https://ui-automation-camp.vercel.app/products/quality-hat")
+
+        // assert that you are on product details page
+        cy.get(detailsPage.productName)
+            .should("contain.text", "Quality Hat")
+
+        // add product to favourites
+        cy.get(detailsPage.addToFavouritesIcon).click()
+        
+        count += 1 // count the toast
+        total += 1 // count the number of items
+
+        // assert that the product is added
+        cy.get(favouritesPage.getToast(count))
             .should("be.visible")
-            .and("contain.text", productData.product5.name)
-        cy.get(homePage.getProductCard(17))
+            .and("contain.text", `${productData.product1.name} added to favorites`)
+
+        cy.get(favouritesPage.favouritesButton)
+            .should("contain.text", `[${total}]`)
+        
+        // go to favourites 
+        cy.get(homePage.favouritesButton).click()
+
+        // wait for the page to load
+        cy.wait(2000)
+
+        // assert that the item is in favourites
+        cy.get(favouritesPage.firstProductCard)
             .should("be.visible")
-            .and("contain.text", productData.product17.name)
-        cy.get(homePage.getProductCard(22))
-            .should("be.visible") // last product
-            .and("contain.text", productData.product22.name)
+            .and("contain.text", productData.product1.name)
     })
 
 })
