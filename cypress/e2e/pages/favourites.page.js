@@ -128,7 +128,7 @@ class Favourites {
     /**
      * @returns the selector for the remove-from-favourites button
      */
-    get addToCartButton () { return ("#remove-favorite-btn") }
+    get removeFromFavouritesButton () { return ("#remove-favorite-btn") }
 
 
     /**
@@ -147,10 +147,19 @@ class Favourites {
     // METHODS
     
     /**
-     * @returns the selector for the the toast that confirms when the product is added/removed from favourites
+     * @returns the selector for the  toast that confirms when the product is added/removed from favourites
      */
     getToast (count) { 
         return (`${this.toast}-${count}`) 
+    }
+    
+
+    /**
+     * @returns the selector for the nth product card
+     * @param {Number} itemNo nth item in the list
+     */
+    getProductCard (itemNo) { 
+        return (`${this.productCard}:nth-child(${itemNo})`) 
     }
 
 
@@ -165,7 +174,7 @@ class Favourites {
     
 
     /**
-     * Add nth product to favourites
+     * Removes the nth product from favourites
      * **(Note: The maximum number of products is 22)**
      * @param {Number} itemNo nth item in the list
      */

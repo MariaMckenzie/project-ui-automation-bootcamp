@@ -30,6 +30,12 @@ class Details {
 
 
     /**
+     * @returns the selector for the button linked to the favourites page
+     */
+    get favouritesButton () { return ("#top-favorite") }
+
+
+    /**
      * @returns the selector for the button linked to the about page
      */
     get aboutButton () { return ("#top-about") }
@@ -111,6 +117,13 @@ class Details {
      */
     get removeFromFavouritesIcon () { return ("#remove-from-favorite") }
 
+    
+    /**
+     * @returns the selector for the toast that confirms when the product is added/removed from favourites
+     */
+    get toast () { return ("#toast") }
+
+
      
 
     // METHODS
@@ -139,6 +152,14 @@ class Details {
             cy.get(this.productQuantity).clear()
             cy.get(this.productQuantity).type(quantity)
         }
+    }
+
+    
+    /**
+     * @returns the selector for the the toast that confirms when the product is added/removed from favourites
+     */
+    getToast (count) { 
+        return (`${this.toast}-${count}`) 
     }
 
 }

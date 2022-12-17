@@ -32,7 +32,7 @@ describe('Favourites', () => {
         cy.get(homePage.favouritesButton).click()
 
         // wait for the page to load
-        cy.wait(2000)
+        cy.wait(1000)
 
         // assert that the nav bar is visible
         cy.get(favouritesPage.navBar)
@@ -59,7 +59,7 @@ describe('Favourites', () => {
         cy.get(homePage.favouritesButton).click()
 
         // wait for the page to load
-        cy.wait(2000)
+        cy.wait(1000)
 
         // assert that the nav bar is visible
         cy.get(favouritesPage.navBar)
@@ -80,7 +80,7 @@ describe('Favourites', () => {
         cy.get(homePage.favouritesButton).click()
 
         // wait for the page to load
-        cy.wait(2000)
+        cy.wait(1000)
 
         // assert that the sign out button is visible
         cy.get(favouritesPage.logoutButton)
@@ -101,7 +101,7 @@ describe('Favourites', () => {
         cy.get(homePage.favouritesButton).click()
 
         // wait for the page to load
-        cy.wait(2000)
+        cy.wait(1000)
 
         // assert that the favourites button is highlighted
         cy.get(favouritesPage.favouritesButton)            
@@ -117,12 +117,13 @@ describe('Favourites', () => {
         favouritesPage.addToFavourites(productData.product1.number)
         
         count += 1 // count the toast
-        total += 1 // count the number of items
+        total += 1 // count the number of products
 
         // assert that the product is added
         cy.get(favouritesPage.getToast(count))
             .should("be.visible")
             .and("contain.text", `${productData.product1.name} added to favorites`)
+            .and("have.css", "background-color", "rgb(198, 246, 213)")
 
         cy.get(favouritesPage.favouritesButton)
             .should("contain.text", `[${total}]`)
@@ -131,9 +132,9 @@ describe('Favourites', () => {
         cy.get(homePage.favouritesButton).click()
 
         // wait for the page to load
-        cy.wait(2000)
+        cy.wait(1000)
 
-        // assert that the item is in favourites
+        // assert that the product is in favourites
         cy.get(favouritesPage.firstProductCard)
             .should("be.visible")
             .and("contain.text", productData.product1.name)
@@ -145,7 +146,7 @@ describe('Favourites', () => {
         favouritesPage.addToFavourites(productData.product1.number)
         
         count = 1 // count the toast
-        total = 1 // count the number of items
+        total = 1 // count the number of products
 
         // assert that the product is added
         cy.get(favouritesPage.getToast(count))
@@ -155,11 +156,11 @@ describe('Favourites', () => {
         cy.get(favouritesPage.favouritesButton)
             .should("contain.text", `[${total}]`)
                 
-        // remove item from favourites
+        // remove product from favourites
         favouritesPage.removeFromFavourites(productData.product1.number)
 
         count += 1 // count the toast
-        total -= 1 // count the number of items
+        total -= 1 // count the number of products
 
         // assert that the product is removed
         cy.get(favouritesPage.getToast(count))
@@ -172,23 +173,142 @@ describe('Favourites', () => {
 
     
     it("07: Verifies that the user can add a product to favourites from the product details page", () => {
+        let productlink = "/products/quality-hat"
+        let productName = "Quality Trucker Hat"
+
         // go to product details page
-        cy.visit("https://ui-automation-camp.vercel.app/products/quality-hat")
+        cy.visit(productlink)
 
         // assert that you are on product details page
         cy.get(detailsPage.productName)
-            .should("contain.text", "Quality Hat")
+            .should("contain.text", productName)
 
         // add product to favourites
         cy.get(detailsPage.addToFavouritesIcon).click()
         
         count += 1 // count the toast
-        total += 1 // count the number of items
+        total += 1 // count the number of products
+
+        // assert that the product is added
+        cy.get(detailsPage.getToast(count))
+            .should("contain.text", `${productName} added to favorites`)
+            .and("have.css", "background-color", "rgb(198, 246, 213)")
+
+        cy.get(detailsPage.favouritesButton)
+            .should("contain.text", `[${total}]`)
+        
+        // go to favourites 
+        cy.get(detailsPage.favouritesButton).click()
+
+        // wait for the page to load
+        cy.wait(1000)
+
+        // assert that the product is in favourites
+        cy.get(favouritesPage.firstProductCard)
+            .should("be.visible")
+            .and("contain.text", productName)
+    })
+    
+    
+    it("08: Verifies that the user can remove a product from favourites from the product details page", () => {
+        let productlink = "/products/quality-hat"
+        let productName = "Quality Trucker Hat"
+
+        // go to product details page
+        cy.visit(productlink)
+
+        // assert that you are on product details page
+        cy.get(detailsPage.productName)
+            .should("contain.text", productName)
+
+        // add product to favourites
+        cy.get(detailsPage.addToFavouritesIcon).click()
+        
+        count += 1 // count the toast
+        total += 1 // count the number of products
+
+        // assert that the product is added
+        cy.get(detailsPage.getToast(count))
+            .and("contain.text", `${productName} added to favorites`)
+
+        cy.get(detailsPage.favouritesButton)
+            .should("contain.text", `[${total}]`)
+                 
+        // remove product from favourites
+        cy.get(detailsPage.removeFromFavouritesIcon).click()
+
+        count += 1 // count the toast
+        total -= 1 // count the number of products
+
+        // assert that the product is removed
+        cy.get(detailsPage.getToast(count))
+            .should("contain.text", `${productName} removed from favorites`)
+            .and("have.css", "background-color", "rgb(254, 215, 215)")
+
+        cy.get(detailsPage.favouritesButton)
+            .should("contain.text", `[${total}]`)
+    })
+
+    
+    it("09: Verifies that the user can add multiple products to favourites from the home page", () => {
+        // add product to favourites (1)
+        favouritesPage.addToFavourites(productData.product1.number)
+
+        count += 1 // count the toast
+        total += 1 // count the number of products        
 
         // assert that the product is added
         cy.get(favouritesPage.getToast(count))
             .should("be.visible")
             .and("contain.text", `${productData.product1.name} added to favorites`)
+            
+        cy.get(favouritesPage.favouritesButton)
+            .should("contain.text", `[${total}]`)
+        
+        
+        // add product to favourites (2)
+        favouritesPage.addToFavourites(productData.product2.number)
+
+        count += 1 // count the toast
+        total += 1 // count the number of products        
+
+        // assert that the product is added
+        cy.get(favouritesPage.getToast(count))
+            .should("be.visible")
+            .and("contain.text", `${productData.product2.name} added to favorites`)
+            
+        cy.get(favouritesPage.favouritesButton)
+            .should("contain.text", `[${total}]`)
+
+        
+        // go to favourites 
+        cy.get(homePage.favouritesButton).click( {force:true} )
+
+        // wait for the page to load
+        cy.wait(1000)
+
+        // assert that the products are in favourites
+        cy.get(favouritesPage.getProductCard(productData.product1.number))
+            .should("be.visible")
+            .and("contain.text", productData.product1.name)
+
+        cy.get(favouritesPage.getProductCard(productData.product2.number))
+            .should("be.visible")
+            .and("contain.text", productData.product2.name)
+    })
+
+    
+    it("10: Verifies that the user can add a product to favourites from the home page and remove it from the favourites page", () => {
+        // add a product to favourites
+        favouritesPage.addToFavourites(productData.product1.number)
+        
+        count += 1 // count the toast
+        total += 1 // count the number of products
+
+        // assert that the product is added
+        cy.get(favouritesPage.getToast(count))
+            .should("contain.text", `${productData.product1.name} added to favorites`)
+            .and("have.css", "background-color", "rgb(198, 246, 213)")
 
         cy.get(favouritesPage.favouritesButton)
             .should("contain.text", `[${total}]`)
@@ -197,12 +317,27 @@ describe('Favourites', () => {
         cy.get(homePage.favouritesButton).click()
 
         // wait for the page to load
-        cy.wait(2000)
+        cy.wait(1000)
 
-        // assert that the item is in favourites
+        // assert that the product is in favourites
         cy.get(favouritesPage.firstProductCard)
             .should("be.visible")
             .and("contain.text", productData.product1.name)
+
+        // remove product
+        cy.get(favouritesPage.removeFromFavouritesButton).click()
+
+        // assert that the product is removed        
+        cy.get(favouritesPage.getToast(count))
+            .should("contain.text", `${productData.product1.name} removed from favorites`)
+            .and("have.css", "background-color", "rgb(254, 215, 215)")
+
+        cy.get(favouritesPage.firstProductCard)
+            .should("not.exist")
+        
+        cy.get(favouritesPage.emptyListText)
+            .should("contain.text", "No favorites added")
     })
+
 
 })
