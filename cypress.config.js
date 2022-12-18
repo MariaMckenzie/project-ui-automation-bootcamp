@@ -16,13 +16,20 @@ module.exports = defineConfig({
             html: false,
             json: true
         },
+<<<<<<< Updated upstream
+    },
+    env: {
+        CYPRESS_MAILSLURP_API_KEY: '9fcabbf7701d5e08fe4dcb65559a44ab360bbd5d70fcb6ab77b69f9626db41ca',
+    }
+=======
 
-        defaultCommandTimeout: 30000,
-        responseTimeout: 30000,
-        requestTimeout: 30000,
+        //defaultCommandTimeout: 30000,
+        //responseTimeout: 30000,
+        //requestTimeout: 30000,
         
         env: {
             CYPRESS_MAILSLURP_API_KEY: '9fcabbf7701d5e08fe4dcb65559a44ab360bbd5d70fcb6ab77b69f9626db41ca',
         },
     },      
+>>>>>>> Stashed changes
 });

@@ -13,7 +13,7 @@ module.exports = {
         cardInfo: [4242424242424242,1224, 123]
     },
     nonexistingUser: {
-        email: "jd15@mail.com",
+        email: "jd@mail.com",
         password: "P@ssword1",
         errorMsg: "Wrong email or password"
     },
