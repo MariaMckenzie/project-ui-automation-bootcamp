@@ -62,7 +62,7 @@ describe('Authentication (05 - 08)', () => {
      */
     it('should verify that the user cannot login using an invalid email address and password combination', () => {
         cy.get(authenticationPage.signInOrRegisterButton).click()
-
+        
         // wait for the page to load
         cy.wait(1000)
 
@@ -81,14 +81,18 @@ describe('Authentication (05 - 08)', () => {
      * Test Case ID: E2E_7
      * Test Scenario: Check login functionality
      */    
-    it('should verify that the user cannot login using an email address that does not exist', () => {
+    it('should verify that the user cannot login using an email address that does not exist', () => { 
+        // variables        
+        const email = `${faker.name.firstName}@unknownEmail.com`
+        const password = "P@ssword1"
+
         cy.get(authenticationPage.signInOrRegisterButton).click()
         
         // wait for the page to load
         cy.wait(1000)
 
         // attempt to sign up when all fields are empty
-        authenticationPage.loginOrSignup(userData.nonexistingUser.email, userData.nonexistingUser.password)
+        authenticationPage.loginOrSignup(email, password)
 
         // assert that the error message is displayed
         cy.get(authenticationPage.invalidLoginError)

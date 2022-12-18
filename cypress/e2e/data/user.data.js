@@ -9,7 +9,7 @@ module.exports = {
         errorMsg: "We're sorry, something went wrong"
     },
     nonexistingUser: {
-        email: "jd15@mail.com",
+        email: "jd@mail.com",
         password: "P@ssword1",
         errorMsg: "Wrong email or password"
     },
