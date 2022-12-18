@@ -66,7 +66,7 @@ describe("Add-to-cart (14 - 17)", () => {
      * Test Case ID: E2E_15
      * Test Scenario: Check add-to-cart functionality
      */
-    it("should verify that the user can ause the direct link to the product details page and add the product to cart", () => {
+    it("should verify that the user can use the direct link to the product details page and add the product to cart", () => {
         // go to product information page
         cy.visit("https://ui-automation-camp.vercel.app/products/quality-mousepad")
 
