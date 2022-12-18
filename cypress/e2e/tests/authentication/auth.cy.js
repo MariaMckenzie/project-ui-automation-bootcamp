@@ -14,7 +14,6 @@ describe('Authentication (01 - 04)', () => {
      * Test Scenario: Check sign up functionality
      */
     it('should verify that the user cannot sign up if one or more input fields are missing', () => {
-        console.log(randomEmail, randomName)
         cy.get(authenticationPage.signInOrRegisterButton).click()
 
         // wait for the page to load and select the sign up section
